@@ -23,4 +23,11 @@ class User < ApplicationRecord
 
   scope :received_reviews, -> (user) { joins(products: { deal: :review }).where(products: {user: user}) }
 
+
+  def chat_with(user)
+    Chatroom.find_by(user_a: self, user_b: user) ||
+    Chatroom.find_by(user_b: self, user_a: user) ||
+    Chatroom.create(user_a: self, user_b: user)
+  end
+
 end
