@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   # has_many_attached :photos
   belongs_to :user
   has_one :deal
+  has_many_attached :photos
 
   validates :title, presence: true
   validates :fabric, inclusion: { in: Product::FABRICS }
