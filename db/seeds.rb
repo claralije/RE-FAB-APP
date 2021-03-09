@@ -52,7 +52,7 @@ deal = Deal.create!(
 )
   review = [true, false].sample
   if review
-    review = Review.create!(
+    review = Review.create(
     title: Faker::Game.title,
     content: Faker::Restaurant.review,
     rating: rand(1...5),

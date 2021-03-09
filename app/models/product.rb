@@ -5,7 +5,9 @@ class Product < ApplicationRecord
   STATUS = ['available', 'sold']
   COLORS = ["White", "Yellow", "Blue", "Red", "Green", "Black", "Brown", "Azure", "Ivory", "Teal", "Silver", "Purple", "Navy blue", "Pea green", "Gray", "Orange", "Maroon", "Charcoal", "Aquamarine", "Coral", "Fuchsia", "Wheat", "Lime", "Crimson", "Khaki", "Hot pink", "Magenta", "Olden", "Plum", "Olive", "Cyan"]
 
-  # has_many_attached :photos
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
+
   belongs_to :user
   has_one :deal
   has_many_attached :photos
