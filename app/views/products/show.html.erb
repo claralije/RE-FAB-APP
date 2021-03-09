@@ -1,5 +1,8 @@
 <h1><%= @product.title %></h1>
 <p>Location: <%= @product.location %></p>
+<% @product.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
 <p>Fabric: <%= @product.fabric %></p>
 <p>Condition: <%= @product.condition %></p>
 <p>Weight: <%= @product.weight %>g</p>
@@ -8,4 +11,5 @@
 <p>Price: £<%= @product.price %>/meter</p>
 <h2>Description:</h2>
 <p><%= @product.description %></p>
+<%= link_to '/ EDIT', edit_product_path %>
 <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>

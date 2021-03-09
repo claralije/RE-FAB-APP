@@ -1,5 +1,92 @@
 <h1>Products :O</h1>
 
+
+
+
+      <%= form_tag products_path, method: :get do %>
+        <%= text_field_tag :location,
+        params[ :location],
+        class: "form-control",
+        placeholder: "Find fabric near you"
+      %>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="temperDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Fabric:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="fabricDropdown">
+            <% Product::FABRICS.each do |fabric| %>
+            <div>
+              <input type="checkbox" value="<%= fabric %>" name="fabric[]" id="<%= fabric %>">
+              <label for="<%= fabric %>"><%= fabric.titleize %></label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="conditionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Condition:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="conditionDropdown">
+            <% Product::CONDITIONS.each do |condition| %>
+            <div>
+              <input type="checkbox" value="<%= condition %>" name="condition[]" id="<%= condition %>">
+              <label for="<%= condition %>"><%= condition.titleize %></label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="colorDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Color:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="colorDropdown">
+            <% Product::COLORS.each do |color| %>
+            <div>
+              <input type="checkbox" value="<%= color %>" name="color[]" id="<%= color %>">
+              <label for="<%= color %>"><%= color.titleize %></label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="ageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Price Range:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="priceDropdown">
+            <% [[1,10],[11,20],[21,30],[31,40],[41,50],[51,'++']].each do |price| %>
+            <div>
+              <input type="checkbox" value="<%= price[1] %>" name="price[]" id="<%= price %>">
+              <label for="<%= price %>">From <%= price[0] %> to <%= price[1] %></label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="quantityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Quantity:
+        </button>
+        <div class="dropdown-menu" aria-labelledby="quantityDropdown">
+            <% [[1,10],[11,20],[21,30],[31,40],[41,'++']].each do |quantity| %>
+            <div>
+              <input type="checkbox" value="<%= quantity[1] %>" name="quantity[]" id="<%= quantity %>">
+              <label for="<%= quantity %>"><%= quantity[0] %> - <%= quantity[1] %> meters </label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+
+      <%= submit_tag  "Search", class: "btn-submit" %>
+      <% end %>
+
+
+
+
+
 <ul>
   <% @products.each do |product| %>
     <li><%= link_to product.title, product_path(product) %></li>
