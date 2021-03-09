@@ -1,0 +1,11 @@
+<h1><%= @product.title %></h1>
+<p>Location: <%= @product.location %></p>
+<p>Fabric: <%= @product.fabric %></p>
+<p>Condition: <%= @product.condition %></p>
+<p>Weight: <%= @product.weight %>g</p>
+<p>Quantity: <%= @product.quantity %> meters</p>
+<p>Color: <%= @product.color %></p>
+<p>Price: £<%= @product.price %>/meter</p>
+<h2>Description:</h2>
+<p><%= @product.description %></p>
+<%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>

@@ -1,0 +1,13 @@
+<%= simple_form_for(@product) do |f| %>
+<%= f.input :title %>
+<%= f.input :fabric, collection: Product::FABRICS %>
+<%= f.input :color %>
+<%= f.input :price %>
+<%= f.input :description %>
+<%= f.input :condition, collection: Product::CONDITIONS %>
+<%= f.input :weight %>
+<%= f.input :quantity %>
+<%= f.button :submit %>
+<% end %>
+
+<!-- f.input :photos, as: :file, input_html: { multiple: true } -->
