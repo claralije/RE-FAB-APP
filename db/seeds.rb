@@ -9,6 +9,7 @@ User.destroy_all
 cities = ["los angeles", "berlin", "paris", "pyongyang", "moscow", "canggu", "francheville", "barcelona", "singapore", "jakarta", "london", "miami", "las vegas", "ibiza"]
 schools = ['Central Saint Martins', 'London College Of Fashion', 'Westminster', 'Goldsmiths', 'Istituto Marangoni', 'Kingston', 'Royal College of Art']
 status = ['in_process', 'closed']
+colors = ["White", "Yellow", "Blue", "Red", "Green", "Black", "Brown", "Azure", "Ivory", "Teal", "Silver", "Purple", "Navy blue", "Pea green", "Gray", "Orange", "Maroon", "Charcoal", "Aquamarine", "Coral", "Fuchsia", "Wheat", "Lime", "Crimson", "Khaki", "Hot pink", "Magenta", "Olden", "Plum", "Olive", "Cyan"]
 
 30.times do
 user = User.create!(
@@ -32,7 +33,7 @@ product = Product.create!(
   title: Faker::Game.title,
   description: 'The best fabric of all time',
   fabric: fabric.sample,
-  color: Faker::Color.color_name,
+  color: colors.sample,
   weight: rand(1...10),
   condition: condition.sample,
   status: product_status.sample,

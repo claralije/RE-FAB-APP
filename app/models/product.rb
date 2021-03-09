@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   FABRICS = ['silk', 'cotton', 'polyester', 'linen', 'leather', 'tencel', 'wool', 'latex', 'pineapple leather', 'faux fur']
   CONDITIONS = ['new', 'used']
   STATUS = ['available', 'sold']
+  COLORS = ["White", "Yellow", "Blue", "Red", "Green", "Black", "Brown", "Azure", "Ivory", "Teal", "Silver", "Purple", "Navy blue", "Pea green", "Gray", "Orange", "Maroon", "Charcoal", "Aquamarine", "Coral", "Fuchsia", "Wheat", "Lime", "Crimson", "Khaki", "Hot pink", "Magenta", "Olden", "Plum", "Olive", "Cyan"]
 
   # has_many_attached :photos
   belongs_to :user
@@ -13,7 +14,7 @@ class Product < ApplicationRecord
   validates :fabric, inclusion: { in: Product::FABRICS }
   validates :description, presence: true
   validates :condition, inclusion: { in: Product::CONDITIONS }
-  validates :color, presence: true
+  validates :color, inclusion: { in: Product::COLORS }
   validates :price, presence: true
   validates :status, inclusion: { in: Product::STATUS }
 
@@ -21,6 +22,13 @@ class Product < ApplicationRecord
 
   # geocoded_by :location
   # after_validation :geocode, if: :will_save_change_to_city?
+    # [...]
+    include PgSearch::Model
+    pg_search_scope :search_by_location,
+      against: [ :location],
+      using: {
+        tsearch: { prefix: true } # <-- now `superman batm` will return something!
+      }
 
   private
 
