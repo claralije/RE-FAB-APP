@@ -1,5 +1,6 @@
 <%= simple_form_for(@product) do |f| %>
 <%= f.input :title %>
+<%= f.input :photos, as: :file, input_html: { multiple: true } %>
 <%= f.input :fabric, collection: Product::FABRICS %>
 <%= f.input :color %>
 <%= f.input :price %>
