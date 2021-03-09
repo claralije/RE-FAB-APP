@@ -3,6 +3,54 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+
+    if params[:location].present?
+      # @users_id = User.near(params[:location], 50).map { |user| user.id }
+      @products = Product.search_by_location(params[:location])
+    end
+
+    if params[:fabric].present?
+      @products = @products.where(fabric: params[:fabric])
+    end
+
+    if params[:color].present?
+      @products = @products.where(color: params[:color])
+    end
+
+    if params[:price].present?
+      price_range = params[:price].map do |number|
+        if number == "10"
+          (1...10).to_a
+        elsif number == "20"
+          (11..20).to_a
+        elsif number == "30"
+          (21..30).to_a
+          elsif number == "40"
+          (31..40).to_a
+          elsif number == "50"
+          (41..500).to_a
+        end
+      end
+      @products = @products.where(price: price_range.flatten)
+    end
+
+    if params[:quantity].present?
+      quantity_range = params[:quantity].map do |number|
+        if number == "10"
+          (1...10).to_a
+        elsif number == "20"
+          (11..20).to_a
+        elsif number == "30"
+          (21..30).to_a
+          elsif number == "40"
+          (31..40).to_a
+          elsif number == "50"
+          (41..500).to_a
+        end
+      end
+      @products = @products.where(quantity: quantity_range.flatten)
+    end
+
   end
 
   def show
