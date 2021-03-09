@@ -1,0 +1,5 @@
+<div> All your conversations </div>
+
+<% @chatrooms.each do |chatroom| %>
+  <%= link_to "conversation with #{chatroom.other_user(current_user).name}", chatroom_path(chatroom)%>
+  <% end %>

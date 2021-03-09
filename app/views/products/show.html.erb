@@ -13,3 +13,7 @@
 <p><%= @product.description %></p>
 <%= link_to '/ EDIT', edit_product_path %>
 <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
+
+<% if @product.user != current_user  %>
+<%= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
+<% end %>
