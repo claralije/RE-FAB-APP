@@ -50,7 +50,12 @@ class ProductsController < ApplicationController
       end
       @products = @products.where(quantity: quantity_range.flatten)
     end
-
+    @markers = @products.geocoded.map do |product|
+      {
+        lat: product.latitude,
+        lng: product.longitude
+      }
+    end
   end
 
   def show
