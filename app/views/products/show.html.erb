@@ -3,6 +3,7 @@
 <% @product.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
+<p>id: <%= @product.user.id %></p>
 <p>Fabric: <%= @product.fabric %></p>
 <p>Condition: <%= @product.condition %></p>
 <p>Weight: <%= @product.weight %>g</p>
@@ -14,6 +15,14 @@
 <%= link_to '/ EDIT', edit_product_path %>
 <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
 
-<% if @product.user != current_user  %>
-<%= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
+<% if @product.user != current_user && !@chat_with_owner%>
+  <%=link_to "Message the guy", chatrooms_path(product_id: @product.id), method: :post  %>
+  <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
+<% elsif  @chat_with_owner && @chat_with_owner.messages.find_by(product: @product) %>
+  <%=link_to "Message the guy", chatroom_path(@chat_with_owner) %>
+<% elsif @product.user != current_user && @chat_with_owner %>
+  <%=link_to "Message the guy", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
 <% end %>
+
+
+

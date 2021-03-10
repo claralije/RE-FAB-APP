@@ -4,16 +4,16 @@ def show
     @deal = Deal.find(params[:id])
     @review = Review.new(deal: @deal)
 
-    authorize @deal
+    #authorize @deal
   end
 
   def create
     @product = Product.find(params[:product_id])
-    @deal = Deal.new(deal_params)
+    @deal = Deal.new()
     @deal.product = @product
     @deal.user = current_user
 
-    authorize @deal
+    #authorize @deal
 
     if @deal.save
       redirect_to deal_path(@deal)
