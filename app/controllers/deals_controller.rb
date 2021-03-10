@@ -4,7 +4,7 @@ def show
     @deal = Deal.find(params[:id])
     @review = Review.new(deal: @deal)
 
-    #authorize @deal
+    authorize @deal
   end
 
   def create
@@ -13,7 +13,7 @@ def show
     @deal.product = @product
     @deal.user = current_user
     @chatroom = @product.message.chatroom
-    #authorize @deal
+    authorize @deal
     if @deal.save
       flash[:notice] = "The deal has been confirmed"
       redirect_to chatroom_path(@chatroom)
@@ -33,25 +33,15 @@ def show
     redirect_to deal_path(@deal)
   end
 
-  def in_process
-    @deal = Deal.find(params[:id])
-    authorize @deal
-    @deal.status = 'in_process'
+  # def in_process
+  #   @deal = Deal.find(params[:id])
+  #   authorize @deal
+  #   @deal.status = 'in_process'
 
-    @deal.save
+  #   @deal.save
 
-    redirect_to deal_path(@deal)
-  end
-
-  def closed
-    @deal = Deal.find(params[:id])
-    authorize @deal
-    @deal.status = 'closed'
-
-    @deal.save
-
-    redirect_to deal_path(@deal)
-  end
+  #   redirect_to deal_path(@deal)
+  # end
 
   private
 

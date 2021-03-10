@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
     @message.product = @product
     @message.chatroom = @chatroom
     @message.user = current_user
+    authorize @message
     if @message.save
       redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
     else
