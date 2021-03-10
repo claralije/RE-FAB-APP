@@ -86,7 +86,12 @@
 
 <ul>
   <% @products.each do |product| %>
-    <li><%= link_to product.title, product_path(product) %></li>
+    <li id="product-<%= product.id %>"><%= link_to product.title, product_path(product) %></li>
+    <% if current_user.has_favorite(product) %>
+      <%= link_to '♥', favorite_path(current_user.has_favorite(product)) , method: :delete %>
+    <% else %>
+      <%= link_to '♡', product_favorites_path(product.id), method: :post %>
+    <% end %>
   <% end %>
 </ul>
 
