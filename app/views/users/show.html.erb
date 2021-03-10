@@ -1,14 +1,33 @@
 <div><h1> Your profile </h1></div>
 
-<div> Here is your info
-  <%= @user.name %>
-  <%= @user.email %>
+<div>
+  <% if @user.photo.attached? %>
+  <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+  <p><%= @user.name %></p>
+  <p><%= @user.email %></p>
+  <p><%= @user.location %> | <%= @user.school %></p>
+  <p><em>"<%= @user.bio %>"</em></p>
+
+  <%= link_to '/ EDIT info', edit_user_path(@user) %>
 
   <h3>Your Shop</h3>
+    <ul>
+    <% @user.products.each do |product| %>
+      <li><%= link_to product.title, product_path(product) %></li>
+    <% end %>
+    </ul>
   <h2><%= link_to '+ Start selling', new_product_path %></h2>
 
   <h3>Deals</h3>
   <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
+    <% @pending_deals.each do |deal| %>
+      <%= link_to deal.product.title, deal_path(deal) %>
+    <% end %>
+
+    <% @closed_deals.each do |deal| %>
+      <%= link_to deal.product.title, deal_path(deal) %>
+    <% end %>
 
   <h3>Favorites</h3>
   <ul>
