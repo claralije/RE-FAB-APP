@@ -10,6 +10,7 @@ class Product < ApplicationRecord
 
   belongs_to :user
   has_one :deal
+  has_one :message
   has_many_attached :photos
 
   validates :title, presence: true

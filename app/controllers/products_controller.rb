@@ -60,6 +60,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @chat_with_owner = current_user.chat_with(@product.user)
   end
 
   def new
