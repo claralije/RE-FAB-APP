@@ -1,7 +1,19 @@
-<div> This is you profile </div>
+<div><h1> Your profile </h1></div>
 
-<div> Here are your info
-<%= current_user.name %>
-<%= current_user.email %>
+<div> Here is your info
+  <%= @user.name %>
+  <%= @user.email %>
 
+  <h3>Your Shop</h3>
+  <h2><%= link_to '+ Start selling', new_product_path %></h2>
+
+  <h3>Deals</h3>
+  <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
+
+  <h3>Favorites</h3>
+  <ul>
+  <% @favorites.each do |favorite| %>
+    <li><%= link_to favorite.product.title, product_path(favorite.product.id) %></li>
+  <% end %>
+  </ul>
 </div>

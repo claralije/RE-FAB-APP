@@ -29,4 +29,7 @@ class User < ApplicationRecord
     Chatroom.find_by(user_b: self, user_a: user)
   end
 
+  def has_favorite(product)
+    self.favorites.find_by(product: product)
+  end
 end

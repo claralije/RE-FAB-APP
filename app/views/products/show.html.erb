@@ -22,6 +22,13 @@
   <%=link_to "Message the guy", chatroom_path(@chat_with_owner) %>
 <% elsif @product.user != current_user && @chat_with_owner %>
   <%=link_to "Message the guy", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
+<% if current_user.has_favorite(@product) %>
+  <%= link_to '♥', favorite_path(current_user.has_favorite(@product)) , method: :delete %>
+<% else %>
+  <%= link_to '♡', product_favorites_path(@product.id), method: :post %>
+<% end %>
+<% if @product.user != current_user  %>
+<%= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
 <% end %>
 
 
