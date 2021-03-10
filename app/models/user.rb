@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
          SCHOOLS = ['Central Saint Martins', 'London College Of Fashion', 'Westminster', 'Goldsmiths', 'Istituto Marangoni', 'Kingston', 'Royal College of Art']
 
-  # has_one_attached :photo
+  has_one_attached :photo
   has_many :deals
   has_many :products
   has_many :favorites
