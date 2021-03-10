@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :chatrooms
   has_many :messages
 
-  validates :name, presence: true
+  validates :name, presence: true, on: :update
   validates :location, presence: true, on: :update
   validates :bio, presence: true, on: :update
   validates :school, inclusion: { in: User::SCHOOLS }, on: :update
