@@ -2,7 +2,7 @@
 <%= f.input :title %>
 <%= f.input :photos, as: :file, input_html: { multiple: true } %>
 <%= f.input :fabric, collection: Product::FABRICS %>
-<%= f.input :color %>
+<%= f.input :color, collection: Product::COLORS %>
 <%= f.input :price %>
 <%= f.input :description %>
 <%= f.input :condition, collection: Product::CONDITIONS %>
