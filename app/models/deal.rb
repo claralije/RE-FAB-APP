@@ -7,4 +7,9 @@ STATUS = ['in_process', 'closed']
   has_one :review
 
   validates :status, inclusion: { in: Deal::STATUS }
+  before_validation :set_status, on: :create
+
+  def set_status
+    self.status = 'in_process'
+  end
 end

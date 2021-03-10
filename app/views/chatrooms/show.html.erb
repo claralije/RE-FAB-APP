@@ -19,14 +19,15 @@
 <div>
 
 <% @products.each do |product| %>
-  <% if product.deal %>
+  <% if !product.deal %>
+
   <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
   <% end %>
 <% end %>
 </div>
 
 <%= simple_form_for [ @chatroom, @message ] do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message #" %>
+  <%= f.input :content, label: false, placeholder: "Is the product still available ?" %>
   <%= f.submit %>
 <% end %>
 

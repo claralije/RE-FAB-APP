@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to chatroom_path(@chatroom, anchor: "message-#{@message.id}")
     else
+      @products = @chatroom.products
       render "chatrooms/show"
     end
   end
