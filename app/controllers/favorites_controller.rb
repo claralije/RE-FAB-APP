@@ -9,6 +9,7 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.new
     @favorite.product = @product
     @favorite.user = current_user
+    authorize @favorite
     @favorite.save
     redirect_to choose_redirection
   end
@@ -16,6 +17,7 @@ class FavoritesController < ApplicationController
   def destroy
     @favorite = Favorite.find(params[:id])
     @product = @favorite.product
+    authorize @favorite
     @favorite.destroy
 
     redirect_to choose_redirection

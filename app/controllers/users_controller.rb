@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @products = @user.products
     @favorites = @user.favorites
+    authorize @user
     @pending_deals = @user.deals.where(status: 'in_process')
     @closed_deals = @user.deals.where(status: 'closed')
   end

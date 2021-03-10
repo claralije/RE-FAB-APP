@@ -61,16 +61,18 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @chat_with_owner = current_user.chat_with(@product.user)
+    authorize @product
   end
 
   def new
     @product = Product.new
+    authorize @product
   end
 
   def create
     @product = Product.new(product_params)
     @product.user = current_user
-
+    authorize @product
     if @product.save
       redirect_to products_path(@products)
     else
@@ -80,10 +82,12 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    authorize @product
   end
 
   def update
     @product = Product.find(params[:id])
+    authorize @product
     @product.update(product_params)
 
     redirect_to product_path(@product)
@@ -91,6 +95,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
+    authorize @product
     @product.destroy
 
     redirect_to products_path
