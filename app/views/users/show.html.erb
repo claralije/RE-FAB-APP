@@ -15,6 +15,7 @@
     <ul>
     <% @user.products.each do |product| %>
       <li><%= link_to product.title, product_path(product) %></li>
+      <li> <%= product.status %> </li>
     <% end %>
     </ul>
   <h2><%= link_to '+ Start selling', new_product_path %></h2>
@@ -27,6 +28,15 @@
 
     <% @closed_deals.each do |deal| %>
       <%= link_to deal.product.title, deal_path(deal) %>
+    <% end %>
+
+    <h3> What you sell status - hurry to make money </h3>
+    <% @my_product_deals.each do |deal| %>
+      <%= link_to deal.product.title, deal_path(deal) %>
+      <li> <%= deal.product.status %> </li>
+      <% if deal.product.status != 'sold'%>
+      <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
+      <% end  %>
     <% end %>
 
   <h3>Favorites</h3>

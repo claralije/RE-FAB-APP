@@ -13,7 +13,11 @@ class DealPolicy < ApplicationPolicy
     user != record.product.user && !Deal.find_by(product: record.product)
   end
 
-  def close?
+  def closed?
     record.status != 'closed' && user == record.product.user
+  end
+
+  def in_process?
+    user && user == record.product.user && record.status != 'in_process'
   end
 end

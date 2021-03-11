@@ -4,8 +4,10 @@ class UsersController < ApplicationController
     @products = @user.products
     @favorites = @user.favorites
     authorize @user
-    @pending_deals = @user.deals.where(status: 'in_process')
+    @pending_deals = @user.deals.where(status: 'pending')
+    @in_process_deal = @user.deals.where(status: 'in_process')
     @closed_deals = @user.deals.where(status: 'closed')
+    @my_product_deals = Deal.joins(:product).where('products.user_id = ?', current_user.id)
   end
 
   def edit

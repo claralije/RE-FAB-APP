@@ -33,15 +33,25 @@ def show
     redirect_to deal_path(@deal)
   end
 
-  # def in_process
-  #   @deal = Deal.find(params[:id])
-  #   authorize @deal
-  #   @deal.status = 'in_process'
+  def in_process
+    @deal = Deal.find(params[:id])
+    authorize @deal
+    @deal.status = 'in_process'
 
-  #   @deal.save
+    @deal.save
 
-  #   redirect_to deal_path(@deal)
-  # end
+    redirect_to user_path(current_user)
+  end
+
+  def closed
+    @deal = Deal.find(params[:id])
+    authorize @deal
+    @deal.status = 'closed'
+
+    @deal.save
+
+    redirect_to user_path(current_user)
+  end
 
   private
 

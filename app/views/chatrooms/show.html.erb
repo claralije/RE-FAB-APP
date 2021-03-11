@@ -19,10 +19,14 @@
 <div>
 
 <% @products.each do |product| %>
-  <% if !product.deal %>
+  <% if !product.deal && product.user != current_user %>
 
   <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
   <% end %>
+<% end %>
+
+<% if @deal && current_user != @deal.user %>
+<%= link_to "Accept", in_process_path(@deal), method: :post %>
 <% end %>
 </div>
 
