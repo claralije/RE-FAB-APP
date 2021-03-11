@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'products#index'
+
+  devise_scope :user do
+    get "/", to: 'devise/sessions#new'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :products do
     resources :deals, only: [:create] # I'm assuming you can delete a deal too??
