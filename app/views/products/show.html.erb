@@ -1,4 +1,7 @@
+<h4><%= link_to "⌫ B A C K", products_path %></h4>
+
 <h1><%= @product.title %></h1>
+<h4>by <%= link_to @product.user.name, user_path(@product.user) %></h4>
 <p>Location: <%= @product.location %></p>
 <% @product.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
@@ -15,15 +18,16 @@
 <%= link_to '/ EDIT', edit_product_path %>
 <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
 
+
 <% if @product.status == 'sold' %>
 <% '' %>
   <% elsif policy(Chatroom.new(user_a: current_user, user_b: @product.user)).create? %>
-  <%=link_to "Message the guy", chatrooms_path(product_id: @product.id), method: :post  %>
+  <%=link_to "Message", chatrooms_path(product_id: @product.id), method: :post  %>
   <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
 <% elsif  @chat_with_owner && @chat_with_owner.messages.find_by(product: @product) %>
-  <%=link_to "Message the guy", chatroom_path(@chat_with_owner) %>
+  <%=link_to "Message", chatroom_path(@chat_with_owner) %>
 <% elsif @product.user != current_user && @chat_with_owner%>
-  <%=link_to "Message the guy", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
+  <%=link_to "Message", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
 <% end %>
 
 <% if current_user.has_favorite(@product) %>

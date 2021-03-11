@@ -1,3 +1,5 @@
+<h4><%= link_to "⌫ B A C K", products_path %></h4>
+
 <div><h1> Your profile </h1></div>
 
 <div>
@@ -19,6 +21,12 @@
     <% end %>
     </ul>
   <h2><%= link_to '+ Start selling', new_product_path %></h2>
+
+  <h3>Your Reviews</h3>
+    <% @user.received_reviews.each do |review| %>
+      <h2><%= review.title %></h2>
+      <%= review.content %>
+    <% end %>
 
   <h3>Deals</h3>
   <!-- Your PENDING, PROCESSING, and PAST deals all go here -->

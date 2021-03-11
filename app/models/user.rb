@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :chatrooms
   has_many :messages
+  has_many :received_reviews, through: :products, source: :review
 
   validates :name, presence: true, on: :update
   validates :location, presence: true, on: :update
@@ -21,7 +22,7 @@ class User < ApplicationRecord
   #geocoded_by :city
   #after_validation :geocode, if: :will_save_change_to_city?
 
-  scope :received_reviews, -> (user) { joins(products: { deal: :review }).where(products: {user: user}) }
+  # scope :received_reviews, -> (user) { joins(products: { deal: :review }).where(products: {user: user}) }
 
 
   def chat_with(user)

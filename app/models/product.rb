@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   has_one :deal
   has_one :message
   has_many_attached :photos
+  has_one :review, through: :deal
 
   validates :title, presence: true
   validates :fabric, inclusion: { in: Product::FABRICS }
