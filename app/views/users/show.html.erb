@@ -40,7 +40,7 @@
 
     <h3> What you sell status - hurry to make money </h3>
     <% @my_product_deals.each do |deal| %>
-      <%= link_to deal.product.title, deal_path(deal) %>
+      <%= link_to deal.product.title, product_path(deal.product) %>
       <li> <%= deal.product.status %> </li>
       <% if deal.product.status != 'sold'%>
       <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
