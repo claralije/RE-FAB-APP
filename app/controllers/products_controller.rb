@@ -50,10 +50,12 @@ class ProductsController < ApplicationController
       end
       @products = @products.where(quantity: quantity_range.flatten)
     end
+
     @markers = @products.geocoded.map do |product|
       {
         lat: product.latitude,
-        lng: product.longitude
+        lng: product.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { product: product })
       }
     end
   end
@@ -87,8 +89,8 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    authorize @product
     @product.update(product_params)
+    authorize @product
 
     redirect_to product_path(@product)
   end
@@ -104,6 +106,6 @@ class ProductsController < ApplicationController
 private
 
   def product_params
-    params.require(:product).permit(:title, :fabric, :description, :condition, :weight, :quantity, :color, :price, photos: [])
+    params.require(:product).permit(:title, :fabric, :description, :condition, :weight, :quantity, :color, :price, :location, photos: [])
   end
 end
