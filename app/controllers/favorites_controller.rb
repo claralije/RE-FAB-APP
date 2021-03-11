@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
     @favorite.user = current_user
     authorize @favorite
     @favorite.save
-    redirect_to choose_redirection
+    redirect_to products_path
   end
 
   def destroy
@@ -20,7 +20,7 @@ class FavoritesController < ApplicationController
     authorize @favorite
     @favorite.destroy
 
-    redirect_to choose_redirection
+    redirect_to products_path
   end
 
   private
