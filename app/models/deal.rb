@@ -1,15 +1,20 @@
 class Deal < ApplicationRecord
 
-STATUS = ['in_process', 'closed']
+STATUS = ['pending', 'in_process', 'closed']
 
   belongs_to :product
   belongs_to :user
   has_one :review
 
   validates :status, inclusion: { in: Deal::STATUS }
-  before_validation :set_status, on: :create
 
-  def set_status
-    self.status = 'in_process'
+  after_update :change_product_status
+
+  def change_product_status
+
+    if self.status == 'closed'
+      self.product.update(status: 'sold')
+      #binding.pry
+    end
   end
 end

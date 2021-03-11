@@ -8,6 +8,8 @@ class ChatroomsController < ApplicationController
     @message = Message.new
     @chatroom = Chatroom.find(params[:id])
     @products = @chatroom.products
+    @deal = Deal.joins(:product).where('products.user_id = ? AND deals.user_id = ?', current_user.id, @chatroom.other_user(current_user).id).last
+
     authorize @chatroom
   end
 

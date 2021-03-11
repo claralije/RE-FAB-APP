@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  post 'deals/:id/in_process', to: 'deals#in_process', as: 'in_process'
+  post 'deals/:id/closed', to: 'deals#closed', as: 'closed'
 end
 
-# delete this line
+
