@@ -48,7 +48,7 @@
 <% end %>
 
     <% if @user == current_user %>
-      <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Deals</h3>
+      <h3> Your Deals With Other Sellers</h3>
     <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
       <% @pending_deals.each do |deal| %>
         <%= link_to deal.product.title, deal_path(deal) %>
