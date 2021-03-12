@@ -6,7 +6,12 @@ class ProductsController < ApplicationController
 
     if params[:location].present?
       # @users_id = User.near(params[:location], 50).map { |user| user.id }
-      @products = Product.search_by_location(params[:location])
+      @products = Product.near(params[:location], 30)
+    end
+
+    if params[:query].present?
+      # @users_id = User.near(params[:location], 50).map { |user| user.id }
+      @products = Product.search_by_user(params[:query])
     end
 
     if params[:fabric].present?
