@@ -1,0 +1,11 @@
+.filtering {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dropdown{
+  flex: 0 0 50%;
+  button{
+    width: 100%
+  }
+}
