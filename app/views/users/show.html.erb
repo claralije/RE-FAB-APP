@@ -1,6 +1,10 @@
 <h4><%= link_to "⌫ B A C K", products_path %></h4>
 
-<div><h1> Your profile </h1></div>
+<% if @user == current_user %>
+  <h1> Your profile </h1>
+  <% else %>
+  <h1><%= @user.name %>'s Profile</h1>
+<% end %>
 
 <div>
   <% if @user.photo.attached? %>
@@ -11,46 +15,69 @@
   <p><%= @user.location %> | <%= @user.school %></p>
   <p><em>"<%= @user.bio %>"</em></p>
 
-  <%= link_to '/ EDIT info', edit_user_path(@user) %>
+  <% if @user == current_user %>
+    <%= link_to '/ EDIT info', edit_user_path(@user) %>
+  <% end %>
 
-  <h3>Your Shop</h3>
+  <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Shop</h3>
+
+  <% if @user.products.empty? %>
+    <p>Nothing for sale yet.</p>
+  <% else %>
     <ul>
     <% @user.products.each do |product| %>
       <li><%= link_to product.title, product_path(product) %></li>
       <li> <%= product.status %> </li>
     <% end %>
     </ul>
-  <h2><%= link_to '+ Start selling', new_product_path %></h2>
 
-  <h3>Your Reviews</h3>
-    <% @user.received_reviews.each do |review| %>
-      <h2><%= review.title %></h2>
-      <%= review.content %>
+    <% if @user == current_user %>
+      <h2><%= link_to '+ Start selling', new_product_path %></h2>
     <% end %>
-
-  <h3>Deals</h3>
-  <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
-    <% @pending_deals.each do |deal| %>
-      <%= link_to deal.product.title, deal_path(deal) %>
-    <% end %>
-
-    <% @closed_deals.each do |deal| %>
-      <%= link_to deal.product.title, deal_path(deal) %>
-    <% end %>
-
-    <h3> What you sell status - hurry to make money </h3>
-    <% @my_product_deals.each do |deal| %>
-      <%= link_to deal.product.title, product_path(deal.product) %>
-      <li> <%= deal.product.status %> </li>
-      <% if deal.product.status != 'sold'%>
-      <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
-      <% end  %>
-    <% end %>
-
-  <h3>Favorites</h3>
-  <ul>
-  <% @favorites.each do |favorite| %>
-    <li><%= link_to favorite.product.title, product_path(favorite.product.id) %></li>
   <% end %>
-  </ul>
+
+    <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Reviews</h3>
+
+<% if @user.received_reviews.empty? %>
+  <p>No reviews yet.</p>
+  <% else %>
+    <% @user.received_reviews.each do |review| %>
+      <h2>Rating: <%= review.rating %>/5 | <%= review.title %></h2>
+      <h4>❝ <%= review.content %> ❞</h4>
+    <% end %>
+<% end %>
+
+    <% if @user == current_user %>
+      <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Deals</h3>
+    <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
+      <% @pending_deals.each do |deal| %>
+        <%= link_to deal.product.title, deal_path(deal) %>
+      <% end %>
+
+      <% @closed_deals.each do |deal| %>
+        <%= link_to deal.product.title, deal_path(deal) %>
+      <% end %>
+
+      <h3> What you sell status - hurry to make money </h3>
+      <% @my_product_deals.each do |deal| %>
+        <%= link_to deal.product.title, product_path(deal.product) %>
+        <li> <%= deal.product.status %> </li>
+        <% if deal.product.status != 'sold'%>
+        <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
+        <% end  %>
+      <% end %>
+    <% end %>
+
+  <h3><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Favorites</h3>
+
+  <% if @user.favorites.empty? %>
+    <p>No favorites yet.</p>
+  <% else %>
+    <ul>
+    <% @favorites.each do |favorite| %>
+      <li><%= link_to favorite.product.title, product_path(favorite.product.id) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
 </div>

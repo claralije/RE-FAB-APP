@@ -9,14 +9,19 @@
 <p>id: <%= @product.user.id %></p>
 <p>Fabric: <%= @product.fabric %></p>
 <p>Condition: <%= @product.condition %></p>
-<p>Weight: <%= @product.weight %>g</p>
+<p>Weight: <%= @product.weight %></p>
 <p>Quantity: <%= @product.quantity %> meters</p>
 <p>Color: <%= @product.color %></p>
 <p>Price: £<%= @product.price %>/meter</p>
 <h2>Description:</h2>
 <p><%= @product.description %></p>
-<%= link_to '/ EDIT', edit_product_path %>
-<%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
+
+<% if policy(@product).edit? %>
+  <%= link_to '/ EDIT', edit_product_path %>
+<% end %>
+<% if policy(@product).destroy? %>
+  <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
+<% end %>
 
 
 <% if @product.status == 'sold' %>
