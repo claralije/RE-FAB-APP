@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
 
     @review.save
 
-    redirect_to product_path
+    redirect_to @deal
   end
 
 private

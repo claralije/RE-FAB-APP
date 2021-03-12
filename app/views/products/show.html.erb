@@ -9,25 +9,30 @@
 <p>id: <%= @product.user.id %></p>
 <p>Fabric: <%= @product.fabric %></p>
 <p>Condition: <%= @product.condition %></p>
-<p>Weight: <%= @product.weight %>g</p>
+<p>Weight: <%= @product.weight %></p>
 <p>Quantity: <%= @product.quantity %> meters</p>
 <p>Color: <%= @product.color %></p>
 <p>Price: £<%= @product.price %>/meter</p>
 <h2>Description:</h2>
 <p><%= @product.description %></p>
-<%= link_to '/ EDIT', edit_product_path %>
-<%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
+
+<% if policy(@product).edit? %>
+  <%= link_to '/ EDIT', edit_product_path %>
+<% end %>
+<% if policy(@product).destroy? %>
+  <%= link_to 'X REMOVE', product_path(@product.id), method: :delete %>
+<% end %>
 
 
 <% if @product.status == 'sold' %>
 <% '' %>
   <% elsif policy(Chatroom.new(user_a: current_user, user_b: @product.user)).create? %>
-  <%=link_to "Message", chatrooms_path(product_id: @product.id), method: :post  %>
+  <%=link_to "✎ MESSAGE", chatrooms_path(product_id: @product.id), method: :post  %>
   <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
 <% elsif  @chat_with_owner && @chat_with_owner.messages.find_by(product: @product) %>
-  <%=link_to "Message", chatroom_path(@chat_with_owner) %>
+  <%=link_to "✎ MESSAGE", chatroom_path(@chat_with_owner) %>
 <% elsif @product.user != current_user && @chat_with_owner%>
-  <%=link_to "Message", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
+  <%=link_to "✎ MESSAGE ", chatroom_messages_path(@chat_with_owner, product_id: @product.id ), method: :post  %>
 <% end %>
 
 <% if current_user.has_favorite(@product) %>
