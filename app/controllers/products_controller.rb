@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @products = Product.all
+    @products = Product.where.not(status: 'sold')
 
     if params[:location].present?
       # @users_id = User.near(params[:location], 50).map { |user| user.id }
