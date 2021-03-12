@@ -1,0 +1,17 @@
+<h4><%= link_to "⌫ B A C K", user_path(@deal.user) %></h4>
+
+<h1><strong>Deal:</strong> #<%= @deal.id %></h1>
+<h1><strong>Status:</strong> <%= @deal.status %></h1>
+
+<h1><strong>Product Info:</strong></h1>
+<h2><%= @deal.product.title %></h2>
+<h2><%= @deal.product.color %> <%= @deal.product.fabric %></h2>
+<h2><strong>Available Quantity:</strong> <%= @deal.product.quantity %> meters</h2>
+<h2><strong>Unit Price:</strong> £<%= @deal.product.price %> / meter</h2>
+
+
+<% if current_user == @deal.product.user %>
+  <h3><%= link_to "Message Buyer", chatroom_path(current_user.chat_with(@deal.user)) %></h3>
+<% else %>
+  <h3><%= link_to "Message Seller", chatroom_path(current_user.chat_with(@deal.product.user)) %></h3>
+<% end %>
