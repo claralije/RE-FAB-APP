@@ -1,43 +1,45 @@
-      <div class="product-card" id="product-<%= product.id %>">
-        <div class="image">
-          <% if product.photos.any? %>
-            <%= cl_image_tag product.photos.first.key, height: 200, width: 200 %>
-          <% else %>
-             <%= image_tag "https://picsum.photos/600/600", class: "img", height: 200, width: 200 %>
-          <% end %>
-        </div>
-      <div class="information">
-        <div class="material">
-          <span>Material</span>
-          <h5><%= product.fabric %></h5>
-        </div>
-
-        <div class="label">
-          <span>Title</span>
-          <h5><%= product.title %></h5>
-        </div>
-      </div>
-
-
-      <div class="price">
-        <div class="quantity">
-          <span>Quantity</span>
-          <h5><%= product.quantity %></h5>
-        </div>
-        <div class="price">
-          <span>Price</span>
-          <h5> <%= product.price %> £ </h5>
-        </div>
-      </div>
-
-      <% if current_user.has_favorite(product) %>
-        <%= link_to favorite_path(current_user.has_favorite(product)), class: "fav" , method: :delete do %>
-          <i class="fas fa-heart"></i>
-        <% end %>
+  <div class="product-card" id="product-<%= product.id %>">
+    <%= link_to product do %>
+    <div class="image">
+      <% if product.photos.any? %>
+        <%= cl_image_tag product.photos.first.key, height: 200, width: 200 %>
       <% else %>
-        <%= link_to product_favorites_path(product.id), class: "fav", method: :post do %>
-          <i class="far fa-heart"></i>
-        <% end %>
+         <%= image_tag "https://picsum.photos/600/600", class: "img", height: 200, width: 200 %>
       <% end %>
     </div>
+  <div class="information">
+    <div class="material">
+      <span>Material</span>
+      <h5><%= product.fabric %></h5>
+    </div>
+
+    <div class="label">
+      <span>Title</span>
+      <h5><%= product.title %></h5>
+    </div>
+  </div>
+
+
+  <div class="price">
+    <div class="quantity">
+      <span>Quantity</span>
+      <h5><%= product.quantity %></h5>
+    </div>
+    <div class="price">
+      <span>Price</span>
+      <h5> <%= product.price %> £ </h5>
+    </div>
+  </div>
+
+  <% if current_user.has_favorite(product) %>
+    <%= link_to favorite_path(current_user.has_favorite(product)), class: "fav" , method: :delete do %>
+      <i class="fas fa-heart"></i>
+    <% end %>
+  <% else %>
+    <%= link_to product_favorites_path(product.id), class: "fav", method: :post do %>
+      <i class="far fa-heart"></i>
+    <% end %>
+  <% end %>
+  <% end %>
+</div>
 
