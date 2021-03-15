@@ -1,0 +1,27 @@
+
+.show-product-info {
+    border: 1px solid black;
+}
+
+.show-product-header {
+  border-bottom: 1px solid black;
+  padding: 16px 16px 0px 16px;
+}
+
+.show-image {
+  height: 352px;
+}
+
+.show-product-description {
+}
+
+.show-fabric-price {
+  display: flex;
+  justify-content: space-between;
+  .show-fabric {
+    border: 1px solid black;
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+  }
+}
