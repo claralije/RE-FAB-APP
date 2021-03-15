@@ -5,8 +5,8 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :products, through: :messages
 
-  def other_user(current_user)
-    if self.user_a == current_user
+  def other_user(user)
+    if self.user_a == user
       return user_b
     else
       return user_a
