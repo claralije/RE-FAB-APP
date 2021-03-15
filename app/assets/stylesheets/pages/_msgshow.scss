@@ -1,0 +1,12 @@
+#new_message {
+    position: fixed;
+    bottom: 80px;
+    width: 95%;
+    .form-control {
+      border-radius: 8px;
+    }
+}
+
+.chatroom-container {
+  padding: 3px 8px;
+}

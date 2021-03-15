@@ -1,38 +1,72 @@
-<h1># </h1>
-<div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-  <% @chatroom.messages.each do |message| %>
-    <% if message.product %>
-      <p>This messqge is about a product</p>
-      <p><%= message.product.title %></p>
-    <% else %>
-      <div class="message-container" id="message-<%= message.id %>">
-        <i class="author">
-          <span><%= message.user.name %></span>
-          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-        </i>
-        <p><%= message.content %></p>
-      </div>
+<div class="chatroom-container">
+
+<!-- ALL THE MSG -->
+  <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
+    <% @chatroom.messages.each do |message| %>
+      <% user = message.user %>
+      <div class="<%= user == current_user ? "sent" : "received" %>">
+
+        <div class="image-container">
+          <% if user.photo.attached? %>
+             <%= cl_image_tag user.photo, height: 200, width: 200 %>
+          <% else %>
+              <%= image_tag "https://i.pravatar.cc/200?img=#{rand(1..20)}", class: "img", height: 200, width: 200 %>
+          <% end %>
+        </div>
+
+        <div class="card-content">
+        <% if message.product %>
+          <div class="user-name">
+            <i><%= message.user.name %></i>
+            <p><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></p>
+          </div>
+          <div class="content">
+            <p> The product I'm interested in is: <%= message.product.title %></p>
+          </div>
+
+        <% else %>
+
+          <div class="message-container" id="message-<%= message.id %>">
+            <div class="user-name">
+              <span><%= message.user.name %></span>
+              <p><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></p>
+            </div>
+            <div class="content">
+              <%= message.content %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<!-- PRODUCT BUTTON CTACTION -->
+  <div>
+
+  <% @products.each do |product| %>
+    <% if !product.deal && product.user != current_user %>
+
+    <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
     <% end %>
   <% end %>
-</div>
 
-<div>
-
-<% @products.each do |product| %>
-  <% if !product.deal && product.user != current_user %>
-
-  <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
+  <% if @deal && current_user != @deal.user %>
+  <%= link_to "Accept", in_process_path(@deal), method: :post %>
   <% end %>
-<% end %>
+  </div>
 
-<% if @deal && current_user != @deal.user %>
-<%= link_to "Accept", in_process_path(@deal), method: :post %>
-<% end %>
+
+
+  <!-- SUBMIT -->
+
+  <%= simple_form_for [ @chatroom, @message ] do |f| %>
+    <%= f.input :content, label: false, placeholder: "Is the product still available ?" %>
+    <%= f.button :submit, 'Send', class: 'button_transparent' %>
+  <% end %>
+
+
+
 </div>
-
-<%= simple_form_for [ @chatroom, @message ] do |f| %>
-  <%= f.input :content, label: false, placeholder: "Is the product still available ?" %>
-  <%= f.submit %>
-<% end %>
-
-
