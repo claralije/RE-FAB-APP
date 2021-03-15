@@ -1,83 +1,103 @@
-<h4><%= link_to "⌫ B A C K", products_path %></h4>
+<div class="container">
+   <div class="back-link">
+    <h4><%= link_to "⌫ B A C K", products_path %></h4>
+   </div>
 
-<% if @user == current_user %>
-  <h1> Your profile </h1>
-  <% else %>
-  <h1><%= @user.name %>'s Profile</h1>
-<% end %>
+   <div class="show-user-info">
+      <div class="show-user-header">
+        <h1><strong><%= @user.name %></strong></h1>
+        <p><%= @user.location %></p>
+        <p>/ <%= @user.school %></p>
+      </div>
 
-<div>
-  <% if @user.photo.attached? %>
-  <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
-  <% end %>
-  <p><%= @user.name %></p>
-  <p><%= @user.email %></p>
-  <p><%= @user.location %> | <%= @user.school %></p>
-  <p><em>"<%= @user.bio %>"</em></p>
+      <div>
+        <% if @user.photo.attached? %>
+          <div class="show-image" style="background-image: url('<%= cl_image_path @user.photo.key, height: 300, width: 400, crop: :fill %>')">
+        <% else %>
+          <div class="show-image" style="background-image: url('')">
+        <% end %>
+      </div>
+      <div class="show-user-bio">
+        <h2><strong>BIO /</strong></h2>
+        <p><em>"<%= @user.bio %>"</em></p>
+        <% if @user == current_user %>
+        <div class="user-edit">
+          <%= link_to '/ EDIT info', edit_user_path(@user) %>
+        </div>
+        <% end %>
+      </div>
+      <div class="show-user-shop">
+        <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Shop /</strong></h3>
 
-  <% if @user == current_user %>
-    <%= link_to '/ EDIT info', edit_user_path(@user) %>
-  <% end %>
+        <% if @user.products.empty? %>
+          <p>Nothing for sale yet.</p>
+        <% else %>
 
-  <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Shop</h3>
+          <div class="product-scroll">
+            <div class="cards">
+              <% @user.products.each do |product| %>
+                  <%= render 'products/card', product: product %>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
-  <% if @user.products.empty? %>
-    <p>Nothing for sale yet.</p>
-  <% else %>
-    <ul>
-    <% @user.products.each do |product| %>
-      <li><%= link_to product.title, product_path(product) %></li>
-      <li> <%= product.status %> </li>
-    <% end %>
-    </ul>
+          <% if @user == current_user %>
+            <h2><%= link_to '+ Start selling', new_product_path %></h2>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="show-user-reviews">
+          <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Reviews /</strong></h3>
+
+      <% if @user.received_reviews.empty? %>
+        <p>No reviews yet.</p>
+        <% else %>
+          <% @user.received_reviews.each do |review| %>
+            <p>Rating: <%= review.rating %>/5 | <%= review.title %></p>
+            <p>"<%= review.content %>"</p>
+          <% end %>
+      <% end %>
+      </div>
 
     <% if @user == current_user %>
-      <h2><%= link_to '+ Start selling', new_product_path %></h2>
-    <% end %>
-  <% end %>
+          <div class="show-user-deals">
+            <h3><strong>Your Deals With Other Sellers /</strong></h3>
+          <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
+            <% @pending_deals.each do |deal| %>
+              <%= link_to deal.product.title, deal_path(deal) %>
+            <% end %>
 
-    <h3> <%= @user == current_user ? "Your" : "#{@user.name}'s" %> Reviews</h3>
+            <% @closed_deals.each do |deal| %>
+              <%= link_to deal.product.title, deal_path(deal) %>
+            <% end %>
 
-<% if @user.received_reviews.empty? %>
-  <p>No reviews yet.</p>
-  <% else %>
-    <% @user.received_reviews.each do |review| %>
-      <h2>Rating: <%= review.rating %>/5 | <%= review.title %></h2>
-      <h4>❝ <%= review.content %> ❞</h4>
-    <% end %>
-<% end %>
+            <h3><strong> What you sell status - hurry to make money / </strong></h3>
+            <% @my_product_deals.each do |deal| %>
+              <%= link_to deal.product.title, product_path(deal.product) %>
+              <li> <%= deal.product.status %> </li>
+              <% if deal.product.status != 'sold'%>
+              <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
+              <% end  %>
+            <% end %>
+          </div>
+         <% end %>
 
-    <% if @user == current_user %>
-      <h3> Your Deals With Other Sellers</h3>
-    <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
-      <% @pending_deals.each do |deal| %>
-        <%= link_to deal.product.title, deal_path(deal) %>
-      <% end %>
+      <div class="show-user-favorites">
+        <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Favorites /</strong></h3>
 
-      <% @closed_deals.each do |deal| %>
-        <%= link_to deal.product.title, deal_path(deal) %>
-      <% end %>
-
-      <h3> What you sell status - hurry to make money </h3>
-      <% @my_product_deals.each do |deal| %>
-        <%= link_to deal.product.title, product_path(deal.product) %>
-        <li> <%= deal.product.status %> </li>
-        <% if deal.product.status != 'sold'%>
-        <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
-        <% end  %>
-      <% end %>
-    <% end %>
-
-  <h3><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Favorites</h3>
-
-  <% if @user.favorites.empty? %>
-    <p>No favorites yet.</p>
-  <% else %>
-    <ul>
-    <% @favorites.each do |favorite| %>
-      <li><%= link_to favorite.product.title, product_path(favorite.product.id) %></li>
-    <% end %>
-    </ul>
-  <% end %>
-
+        <% if @user.favorites.empty? %>
+          <p>No favorites yet.</p>
+        <% else %>
+          <div class="product-scroll">
+            <div class="cards">
+              <% @favorites.each do |favorite| %>
+                <%= render 'products/card', product: favorite.product %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 </div>

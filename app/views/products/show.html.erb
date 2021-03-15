@@ -5,13 +5,17 @@
 
   <div class="show-product-info">
     <div class="show-product-header">
-      <h1><%= @product.title %></h1>
+      <h1><strong><%= @product.title %></strong></h1>
       <h4>by <%= link_to @product.user.name, user_path(@product.user) %></h4>
       <p>LOCATION / <%= @product.location %></p>
     </div>
 
     <div>
-      <div class="show-image" style="background-image: url('<%= cl_image_path @product.photos.first.key, height: 300, width: 400, crop: :fill %>')">
+      <% if @product.photos.any? %>
+        <div class="show-image" style="background-image: url('<%= cl_image_path @product.photos.first.key, height: 300, width: 400, crop: :fill %>')">
+      <% else %>
+        <div class="show-image" style="background-image: url('')">
+      <% end %>
           <% if current_user.has_favorite(@product) %>
             <%= link_to favorite_path(current_user.has_favorite(@product)), class: "fav" , method: :delete do %>
               <i class="fas fa-heart"></i>
