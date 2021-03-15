@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
 
-  FABRICS = ['silk', 'cotton', 'polyester', 'linen', 'leather', 'tencel', 'wool', 'latex', 'pineapple leather', 'faux fur']
+  FABRICS = ['silk', 'cotton', 'polyester', 'linen', 'leather', 'tencel', 'wool', 'latex', 'faux fur']
   CONDITIONS = ['new', 'used']
   STATUS = ['available', 'sold']
-  COLORS = ["White", "Yellow", "Blue", "Red", "Green", "Black", "Brown", "Purple", "Gray", "Orange", "pink", "Black"]
+  COLORS = ["White", "Yellow", "Blue", "Red", "Green", "Brown", "Purple", "Gray", "Orange", "pink", "Black"]
 
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?

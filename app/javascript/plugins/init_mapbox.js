@@ -11,7 +11,7 @@ const initMapbox = () => {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v10'
     });
-
+    window.indexMap = map
     const markers = JSON.parse(mapElement.dataset.markers);
 
     markers.forEach((marker) => {

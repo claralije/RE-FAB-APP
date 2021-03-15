@@ -1,13 +1,15 @@
 <div class="container">
+
+<%= render 'mappopup' %>
+
   <h1>// PRODUCTS </h1>
 
 <%= render 'filterpopup' %>
 
+
 <!-- PRODUCTS SECTION  -->
 
 <div class="cards">
-
-
 <% @products.each do |product| %>
   <%= link_to product do %>
       <div class="product-card" id="product-<%= product.id %>">
@@ -62,9 +64,6 @@
 
 <h2><%= link_to '+ Start selling', new_product_path %></h2>
 
-<div id="map"
- style="width: 100%; height: 600px;"
- data-markers="<%= @markers.to_json %>"
- data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
 
 </div>

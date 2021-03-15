@@ -4,5 +4,18 @@
 
 .mapboxgl-popup-content {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  width: 200px;
+}
+
+#mapModal.show{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  .modal-dialog{
+    width: 100%;
+  }
+}
+
+.modal-dialog-map {
+  max-height: 100vh;
 }
