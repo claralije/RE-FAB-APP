@@ -1,11 +1,31 @@
-.filtering {
-  display: flex;
-  flex-wrap: wrap;
+
+.button_transparent {
+  padding: 8px 8px;
+  background-color: white;
+  color: $gray;
+  border: 1px solid #ced4da;
+  &:hover {
+    background-color: $gray;
+    color: white;
+    border: none;
+  }
 }
 
-.dropdown{
-  flex: 0 0 50%;
-  button{
-    width: 100%
+.button_selected {
+  padding: 8px 8px;
+  background-color: $gray;
+  color: white;
+  border: none;
+  &:hover {
+    background-color: white;
+    color: $gray;
+    border: 1px solid #ced4da;
   }
+}
+
+.button_cta {
+  padding: 8px 8px;
+  background-color: $neon;
+  color: $gray;
+  border: none;
 }
