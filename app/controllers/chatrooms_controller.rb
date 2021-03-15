@@ -1,6 +1,6 @@
 class ChatroomsController < ApplicationController
   def index
-    @chatrooms = Chatroom.where(user_a: current_user).or(Chatroom.where(user_b: current_user))
+    @chatrooms = Chatroom.includes(:messages).where(user_a: current_user).or(Chatroom.includes(:messages).where(user_b: current_user)).order('messages.created_at DESC')
 
   end
 
