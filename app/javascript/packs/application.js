@@ -34,4 +34,10 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initMapbox();
   initFilterForm();
+
+  document.querySelector(".map-button")?.addEventListener('click', ()=>{
+    setTimeout(()=>{
+      indexMap.resize()
+    }, 200)
+  })
 });

@@ -1,6 +1,17 @@
-<% product.photos[0..1].each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
-<h2><%= link_to product.title, product_path(product) %></h2>
-<h3><%= product.color %> <%= product.fabric %> ⋮ <%= product.location %></h3>
-<h4>£ <%= product.price %> / meter</h4>
+
+     <div class="info-window-card card" style="width: 100%;">
+        <div class="card-img-top">
+          <%= link_to product do %>
+          <% product.photos[0..1].each do |photo| %>
+          <%= cl_image_tag photo.key, height: 80, width: 90, crop: :fill %>
+          <% end %>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-title"> <%= product.title %> </h3>
+          <p class="card-text"> Fabric: <%= product.fabric %> </p>
+          <p class="card-text"> Located in: <%= product.location %> </p>
+          <%= link_to 'See product', product_path(product), class: "button_transparent" %>
+        </div>
+    </div>

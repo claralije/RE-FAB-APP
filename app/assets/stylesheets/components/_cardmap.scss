@@ -1,0 +1,31 @@
+.card-body {
+  padding: 8px 8px;
+}
+
+.mapboxgl-popup-content {
+  padding: 0px 0px 0px !important;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2) !important;
+  h3 {
+    font-size: 16px;
+    margin: 8px 0px 8px 0px;
+  }
+  .card-text {
+    margin: 8px 0px 8px 0px;
+  }
+  box-shadow: none;
+}
+
+
+.info-window-card {
+  border: none;
+  a {
+    display: block;
+  }
+}
+
+.card-img-top {
+  img {
+  width: 100%;
+  object-fit: cover;
+}
+}
