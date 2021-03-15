@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Products :O</h1>
+  <h1>// PRODUCTS </h1>
 
 <%= render 'filterpopup' %>
 
@@ -13,7 +13,7 @@
       <div class="product-card" id="product-<%= product.id %>">
         <div class="image">
           <% if product.photos.any? %>
-            <%= cl_image_tag product.photos.first.key, height: 100, width: 200, crop: :fill %>
+            <%= cl_image_tag product.photos.first.key, height: 200, width: 200 %>
           <% else %>
              <%= image_tag "https://picsum.photos/600/600", class: "img", height: 200, width: 200 %>
           <% end %>
