@@ -1,0 +1,59 @@
+
+.menu-container {
+  display: flex;
+  text-align: -webkit-center;
+  border-top: 1px solid $gray;
+  border-bottom: 1px solid $gray;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  z-index: 10;
+
+
+
+  .search, .sell, .message, .profile {
+    i {
+      font-size: 24px;
+      color: #ced4da;
+    }
+    &.active {
+      i {
+        color: $gray;
+      }
+    }
+  }
+
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 8px 8px;
+    border-right: 1px solid $gray;
+  }
+  .sell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 8px 8px;
+    border-right: 1px solid $gray;
+  }
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 8px 8px;
+    border-right: 1px solid $gray;
+  }
+  .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 8px 8px;
+  }
+}

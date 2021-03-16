@@ -8,13 +8,13 @@
 .map-button {
   display: flex;
   color: $gray;
-  font-size: 30px;
+  font-size: 24px;
   background: white;
   padding: 12px;
   border-radius: 50%;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 80px;
+  right: 20px;
   z-index: 2;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
@@ -22,13 +22,13 @@
 .filters-button {
   display: flex;
   color: $gray;
-  font-size: 30px;
+  font-size: 24px;
   background: white;
   padding: 12px;
   border-radius: 50%;
   position: fixed;
-  bottom: 100px;
-  right: 30px;
+  bottom: 150px;
+  right: 20px;
   z-index: 2;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
