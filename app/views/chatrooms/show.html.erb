@@ -1,38 +1,112 @@
-<h1># </h1>
-<div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-  <% @chatroom.messages.each do |message| %>
-    <% if message.product %>
-      <p>This messqge is about a product</p>
-      <p><%= message.product.title %></p>
-    <% else %>
-      <div class="message-container" id="message-<%= message.id %>">
-        <i class="author">
-          <span><%= message.user.name %></span>
-          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-        </i>
-        <p><%= message.content %></p>
+<div class="chatroom-container">
+
+  <div>
+    <h1> Chat with <%= @chatroom.other_user(current_user).name %> </h1>
+  </div>
+
+<!-- ALL THE MSG -->
+  <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
+    <% @chatroom.messages.each do |message| %>
+      <% user = message.user %>
+      <div class="<%= user == current_user ? "sent" : "received" %>">
+
+        <% if user == current_user %>
+
+<!-- CARTE OF THE MESSAGES WE SEND -->
+        <div class="message-sent">
+
+          <div class="card-content">
+          <% if message.product %>
+            <div class="user-name">
+              <p><%= message.created_at.strftime("%l:%M%p") %></p>
+            </div>
+            <div class="content">
+
+              <p> The product I'm interested in is: </p>
+              <%= render 'products/card', product: message.product %>
+            </div>
+          <% else %>
+
+            <div class="message-container" id="message-<%= message.id %>">
+              <div class="user-name">
+                <p><%= message.created_at.strftime("%l:%M%p") %></p>
+              </div>
+              <div class="content">
+                <%= message.content %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+<!-- CARTE OF THE MESSAGES WE RECEIVE -->
+
+          <% else %>
+<div class="message-received">
+
+          <div class="card-content">
+          <% if message.product %>
+            <div class="user-name">
+              <p><%= message.created_at.strftime("%l:%M%p") %></p>
+            </div>
+            <div class="content">
+              <p> The product I'm interested in is: </p>
+              <%= render 'products/card', product: message.product %>
+            </div>
+
+          <% else %>
+
+            <div class="message-container" id="message-<%= message.id %>">
+              <div class="user-name">
+                <p><%= message.created_at.strftime("%l:%M%p") %></p>
+              </div>
+              <div class="content">
+                <%= message.content %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+</div>
+
+
+        <% end %>
+
+
+
+
+  </div>
+ <% end %>
+
+<!-- PRODUCT BUTTON CTACTION -->
+    <% @products.last(1).each do |product| %>
+      <% if !product.deal && product.user != current_user %>
+        <div class="button_cta buy">
+            <%= link_to "Buy product", product_deals_path(product), method: :post %>
+        </div>
+      <% elsif product.deal && product.deal.user == current_user && product.deal.status == 'in_process' %>
+      <div class="button_cta buy">
+            <a> In process </a>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @deal && current_user != @deal.user %>
+      <div class="button_cta buy">
+        <%= link_to "Accept", in_process_path(@deal), method: :post %>
       </div>
     <% end %>
-  <% end %>
 </div>
 
-<div>
 
-<% @products.each do |product| %>
-  <% if !product.deal && product.user != current_user %>
 
-  <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
+  <!-- SUBMIT -->
+
+  <%= simple_form_for [ @chatroom, @message ] do |f| %>
+  <div class="form-module">
+    <%= f.input :content, label: false, placeholder: "Is the product still available ?", wrapper_html: { class: 'input' }, input_html: { class: 'textarea' } %>
+    <%= f.button :submit, 'Send', class: 'button_selected' %>
+  </div>
   <% end %>
-<% end %>
 
-<% if @deal && current_user != @deal.user %>
-<%= link_to "Accept", in_process_path(@deal), method: :post %>
-<% end %>
+
+
 </div>
-
-<%= simple_form_for [ @chatroom, @message ] do |f| %>
-  <%= f.input :content, label: false, placeholder: "Is the product still available ?" %>
-  <%= f.submit %>
-<% end %>
-
-
