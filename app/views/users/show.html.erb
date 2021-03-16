@@ -26,6 +26,20 @@
         </div>
         <% end %>
       </div>
+
+  <% if @user != current_user %>
+    <div class="user-message">
+      <% if policy(Chatroom.new(user_a: current_user, user_b: @user)).create? %>
+        <%=link_to "✎ MESSAGE", chatrooms_path, method: :post  %>
+        <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
+      <% elsif current_user.chat_with(@user) %>
+        <%=link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@user)) %>
+      <% end %>
+    </div>
+
+  <% end %>
+
+
       <div class="show-user-shop">
         <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Shop /</strong></h3>
 
@@ -39,14 +53,16 @@
                   <%= render 'products/card', product: product %>
               <% end %>
             </div>
+              <% if @user == current_user %>
+              <div class="user-edit">
+                <%= link_to '+ SELL', new_product_path %>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
           </div>
         </div>
 
-          <% if @user == current_user %>
-            <h2><%= link_to '+ Start selling', new_product_path %></h2>
-          <% end %>
-        <% end %>
-      </div>
 
       <div class="show-user-reviews">
           <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Reviews /</strong></h3>
@@ -55,6 +71,7 @@
         <p>No reviews yet.</p>
         <% else %>
           <% @user.received_reviews.each do |review| %>
+            <p>---------------------------------</p>
             <p>Rating: <%= review.rating %>/5 | <%= review.title %></p>
             <p>"<%= review.content %>"</p>
           <% end %>
@@ -63,24 +80,28 @@
 
     <% if @user == current_user %>
           <div class="show-user-deals">
-            <h3><strong>Your Deals With Other Sellers /</strong></h3>
-          <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
-            <% @pending_deals.each do |deal| %>
-              <%= link_to deal.product.title, deal_path(deal) %>
-            <% end %>
+            <div class="users-deals">
+              <h3><strong>Deals /</strong></h3>
+              <h3><strong>By you, to others /</strong></h3>
+            <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
+              <% @pending_deals.each do |deal| %>
+                <%= link_to deal.product.title, deal_path(deal) %>
+              <% end %>
 
-            <% @closed_deals.each do |deal| %>
-              <%= link_to deal.product.title, deal_path(deal) %>
-            <% end %>
-
-            <h3><strong> What you sell status - hurry to make money / </strong></h3>
-            <% @my_product_deals.each do |deal| %>
-              <%= link_to deal.product.title, product_path(deal.product) %>
-              <li> <%= deal.product.status %> </li>
-              <% if deal.product.status != 'sold'%>
-              <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
-              <% end  %>
-            <% end %>
+              <% @closed_deals.each do |deal| %>
+                <%= link_to deal.product.title, deal_path(deal) %>
+              <% end %>
+            </div>
+            <div class="others-deals">
+              <h3><strong> By others, to you / </strong></h3>
+              <% @my_product_deals.each do |deal| %>
+                <%= link_to deal.product.title, deal_path(deal) %>
+                <li> <%= deal.product.status %> </li>
+                <% if deal.product.status != 'sold'%>
+                <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
+                <% end  %>
+              <% end %>
+            </div>
           </div>
          <% end %>
 

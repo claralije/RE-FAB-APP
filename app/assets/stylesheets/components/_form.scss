@@ -1,0 +1,25 @@
+.new-product {
+  margin: 8px 8px;
+  padding: 24px 24px;
+  border: 1px solid black;
+
+  .btn {
+    background-color: black;
+    color: white;
+    margin-top: 8px;
+  }
+}
+
+.form-control {
+  border: 1px solid black;
+}
+
+.landing-page-logo {
+  display: flex;
+  justify-content: center;
+  margin: 1px 0px 24px 8px;
+}
+
+#new_user {
+  margin-bottom: 24px;
+}
