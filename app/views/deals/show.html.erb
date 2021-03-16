@@ -1,27 +1,53 @@
-<h4><%= link_to "⌫ B A C K", user_path(@deal.user) %></h4>
+<div class="container">
+  <div class="back-link">
+    <h4><%= link_to "⌫ B A C K", user_path(@deal.user) %></h4>
+  </div>
+  <div class="deal-card">
+    <div class="deal-header">
+      <h3><strong>DEAL ID / </strong><%= @deal.id %></h3>
+    </div>
+    <div class="deal-product-info">
+      <h3><strong>PRODUCT INFO //</strong></h3>
+      <p><strong>TITLE / </strong><%= @deal.product.title %><strong> by </strong><u><%= link_to @deal.product.user.name, user_path(@deal.product.user) %></u></p>
+      <p><strong>FABRIC / </strong><%= @deal.product.fabric %></p>
+      <p><strong>COLOR / </strong><%= @deal.product.color %></p>
+      <p><strong>QUANTITY / </strong> <%= @deal.product.quantity %> meters</p>
+      <p><strong>PRICE / </strong> £<%= @deal.product.price %> / meter</p>
+    </div>
+    <div class="deal-status-box">
+      <div class="deal-status"><h3><strong>/ STATUS </strong></h3></div><div class="deal-status-response"><%= @deal.status %></div>
+    </div>
+  </div>
 
-<h1><strong>Deal:</strong> #<%= @deal.id %></h1>
-<h1><strong>Status:</strong> <%= @deal.status %></h1>
+    <% if current_user == @deal.product.user %>
+    <div class="accept-reject">
+      <div class="button_cta buy">
+        <%= link_to "Accept #{@deal.product.title}", in_process_path(@deal), method: :post %>
+      </div>
+    </div>
+    <% end %>
 
-<h1><strong>Product Info:</strong></h1>
-<h2><%= @deal.product.title %></h2>
-<h2><%= @deal.product.color %> <%= @deal.product.fabric %></h2>
-<h2><strong>Available Quantity:</strong> <%= @deal.product.quantity %> meters</h2>
-<h2><strong>Unit Price:</strong> £<%= @deal.product.price %> / meter</h2>
+    <% if current_user == @deal.product.user %>
+    <div class="deal-message">
+      <%= link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@deal.user)) %>
+    </div>
+    <% else %>
+    <div class="deal-message">
+      <%= link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@deal.product.user)) %>
+    </div>
+    <% end %>
 
 
-<% if current_user == @deal.product.user %>
-  <h3><%= link_to "Message Buyer", chatroom_path(current_user.chat_with(@deal.user)) %></h3>
-<% else %>
-  <h3><%= link_to "Message Seller", chatroom_path(current_user.chat_with(@deal.product.user)) %></h3>
-<% end %>
+    <% if policy(@review).create? %>
+    <div class="card deal-review">
+      <h1>Leave a review /</h1>
+        <%= simple_form_for([ @deal, @review ]) do |f| %>
+        <%= f.input :title %>
+        <%= f.input :rating, input_html: {min: 0, max: 5} %>
+        <%= f.input :content %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+    <% end %>
+</div>
 
-<% if policy(@review).create? %>
-  <h1>Leave a review:</h1>
-    <%= simple_form_for([ @deal, @review ]) do |f| %>
-    <%= f.input :title %>
-    <%= f.input :rating, input_html: {min: 0, max: 5} %>
-    <%= f.input :content %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>

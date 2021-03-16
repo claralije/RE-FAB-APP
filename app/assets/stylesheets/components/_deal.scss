@@ -1,0 +1,62 @@
+.deal-card {
+  border: 1px solid black;
+}
+
+.deal-header {
+  border-bottom: 1px solid black;
+  padding: 16px 0px 8px 16px;
+  background-color: black;
+  color: white;
+}
+
+.deal-product-info {
+  border-bottom: 1px solid black;
+  padding: 16px 8px 8px 16px;
+}
+
+.deal-status-box {
+  display: flex;
+  justify-content: space-between;
+
+  .deal-status {
+    background-color: black;
+    color: white;
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    padding: 8px 0px 0px 16px;
+  }
+
+  .deal-status-response {
+    display: flex;
+    align-items: center;
+    flex: 0 0 50%;
+    padding-left: 16px;
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+}
+
+  .deal-message {
+    margin-bottom: 8px;
+    padding: 8px 1px 1px 16px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .deal-review {
+    margin: 24px 0px 16px 0px;
+    padding: 16px 24px 16px 24px;
+    border: 1px solid black;
+    .btn {
+      background-color: black;
+      color: white;
+      margin-top: 8px;
+    }
+  }
+
+  .accept-reject {
+    margin-top: 24px;
+  }

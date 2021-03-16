@@ -60,9 +60,7 @@
 
   <% if @product.user != current_user %>
     <div class="show-message">
-      <% if @product.status == 'sold' %>
-
-        <% elsif policy(Chatroom.new(user_a: current_user, user_b: @product.user)).create? %>
+        <% if policy(Chatroom.new(user_a: current_user, user_b: @product.user)).create? %>
         <%=link_to "✎ MESSAGE", chatrooms_path(product_id: @product.id), method: :post  %>
         <%#= link_to '✎ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
       <% elsif  @chat_with_owner && @chat_with_owner.messages.find_by(product: @product) %>

@@ -1,3 +1,8 @@
+.user-edit {
+  position: sticky;
+  left: 0;
+}
+
 .back-link {
   padding-top: 8px;
   h4 {
@@ -17,7 +22,7 @@
 }
 .show-user-bio {
   border-bottom: 1px solid black;
-  padding: 16px 16px 0px 16px;
+  padding: 16px 16px 24px 16px;
 }
 
 .show-user-shop {
@@ -30,13 +35,23 @@
   padding: 16px 16px 0px 16px;
 }
 
-.show-user-deals {
-  padding: 16px 16px 0px 16px;
-  border-bottom: 1px solid black;
-}
-
 .show-user-favorites {
   padding: 16px 16px 0px 16px;
+  border-top: 1px solid black;
+}
+
+
+.user-edit {
+  a {
+    background-color: black;
+    color: white;
+    padding: 10px 32px;
+    font-size: 16px;
+  }
+}
+
+.users-deals {
+  padding: 16px 16px 8px 16px;
 }
 
 .show-product-photos {
@@ -132,6 +147,16 @@
   .product-scroll {
   width: 100%;
   overflow-x: auto;
+  margin-bottom: 16px;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
 
   .cards {
     list-style: none;
