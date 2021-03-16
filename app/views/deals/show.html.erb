@@ -17,28 +17,37 @@
     <div class="deal-status-box">
       <div class="deal-status"><h3><strong>/ STATUS </strong></h3></div><div class="deal-status-response"><%= @deal.status %></div>
     </div>
+  </div>
+
+    <% if current_user == @deal.product.user %>
+    <div class="accept-reject">
+      <div class="button_cta buy">
+        <%= link_to "Accept #{@deal.product.title}", in_process_path(@deal), method: :post %>
+      </div>
+    </div>
+    <% end %>
 
     <% if current_user == @deal.product.user %>
     <div class="deal-message">
-      <h3><strong><%= link_to "✎ MESSAGE BUYER", chatroom_path(current_user.chat_with(@deal.user)) %></strong></h3>
+      <%= link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@deal.user)) %>
     </div>
     <% else %>
     <div class="deal-message">
-      <h3><strong><%= link_to "✎ MESSAGE SELLER", chatroom_path(current_user.chat_with(@deal.product.user)) %></strong></h3>
+      <%= link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@deal.product.user)) %>
     </div>
     <% end %>
-  </div>
 
 
-    <%# if policy(@review).create? %>
-    <% if true %>
-      <h1>Leave a review:</h1>
+    <% if policy(@review).create? %>
+    <div class="card deal-review">
+      <h1>Leave a review /</h1>
         <%= simple_form_for([ @deal, @review ]) do |f| %>
         <%= f.input :title %>
         <%= f.input :rating, input_html: {min: 0, max: 5} %>
         <%= f.input :content %>
         <%= f.button :submit %>
       <% end %>
+    </div>
     <% end %>
 </div>
 

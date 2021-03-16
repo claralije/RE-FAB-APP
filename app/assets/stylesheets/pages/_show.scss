@@ -35,13 +35,13 @@
   padding: 16px 16px 0px 16px;
 }
 
-.show-user-deals {
-  padding: 16px 16px 0px 16px;
-  border-bottom: 1px solid black;
-}
-
 .show-user-favorites {
   padding: 16px 16px 0px 16px;
+  border-top: 1px solid black;
+}
+
+.show-user-deals {
+  padding: 16px 16px 16px 16px;
 }
 
 .user-edit {

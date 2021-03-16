@@ -17,7 +17,6 @@
 .deal-status-box {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
 
   .deal-status {
     background-color: black;
@@ -41,4 +40,23 @@
   .deal-message {
     margin-bottom: 8px;
     padding: 8px 1px 1px 16px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .deal-review {
+    margin: 24px 0px 16px 0px;
+    padding: 16px 24px 16px 24px;
+    border: 1px solid black;
+    .btn {
+      background-color: black;
+      color: white;
+      margin-top: 8px;
+    }
+  }
+
+  .accept-reject {
+    margin-top: 24px;
   }

@@ -1,0 +1,40 @@
+  <div class="product-card" id="product-<%= product.id %>">
+    <%= link_to deal do %>
+    <div class="image">
+      <% if product.photos.any? %>
+        <%= cl_image_tag product.photos.first.key, height: 200, width: 200 %>
+      <% else %>
+         <%= image_tag "https://picsum.photos/600/600", class: "img", height: 200, width: 200 %>
+      <% end %>
+    </div>
+  <div class="information">
+    <div class="material">
+      <span>Material</span>
+      <h5><%= product.fabric %></h5>
+    </div>
+
+    <div class="label">
+      <span>Title</span>
+      <h5><%= product.title %></h5>
+    </div>
+  </div>
+
+
+  <div class="price">
+    <div class="quantity">
+      <span>Quantity</span>
+      <h5><%= product.quantity %></h5>
+    </div>
+    <div class="price">
+      <span>Price</span>
+      <h5> <%= product.price %> £ </h5>
+    </div>
+  </div>
+  <% if controller_name != 'chatrooms' %>
+    <div class="status">
+      <%= deal.status %>
+    </div>
+    <% end %>
+  <% end  %>
+</div>
+
