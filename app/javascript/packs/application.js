@@ -39,5 +39,6 @@ document.addEventListener('turbolinks:load', () => {
     setTimeout(()=>{
       indexMap.resize()
     }, 200)
+
   })
 });
