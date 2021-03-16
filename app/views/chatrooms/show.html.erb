@@ -1,5 +1,9 @@
 <div class="chatroom-container">
 
+  <div>
+    <h1> Chat with <%= @chatroom.other_user(current_user).name %> </h1>
+  </div>
+
 <!-- ALL THE MSG -->
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.each do |message| %>
@@ -73,18 +77,23 @@
  <% end %>
 
 <!-- PRODUCT BUTTON CTACTION -->
-  <div class="button_cta buy">
     <% @products.last(1).each do |product| %>
       <% if !product.deal && product.user != current_user %>
-
-      <%= link_to "Buy product", product_deals_path(product), method: :post %>
+        <div class="button_cta buy">
+            <%= link_to "Buy product", product_deals_path(product), method: :post %>
+        </div>
+      <% elsif product.deal && product.deal.user == current_user && product.deal.status == 'in_process' %>
+      <div class="button_cta buy">
+            <a> In process </a>
+        </div>
       <% end %>
     <% end %>
 
     <% if @deal && current_user != @deal.user %>
-    <%= link_to "Accept", in_process_path(@deal), method: :post %>
+      <div class="button_cta buy">
+        <%= link_to "Accept", in_process_path(@deal), method: :post %>
+      </div>
     <% end %>
-  </div>
 </div>
 
 
