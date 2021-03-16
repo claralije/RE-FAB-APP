@@ -40,9 +40,6 @@
   border-top: 1px solid black;
 }
 
-.show-user-deals {
-  padding: 16px 16px 16px 16px;
-}
 
 .user-edit {
   a {
@@ -51,6 +48,10 @@
     padding: 10px 32px;
     font-size: 16px;
   }
+}
+
+.users-deals {
+  padding: 16px 16px 8px 16px;
 }
 
 .show-product-photos {
