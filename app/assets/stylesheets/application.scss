@@ -16,5 +16,14 @@
 @import "components/buttons";
 @import "components/cardmap";
 @import "pages/chats";
-@import "pages/msgshow"
+@import "pages/msgshow";
+@import "components/testnav";
+@import "components/topbar";
 
+.top-space {
+  padding-top: 70px;
+}
+
+.bottom-space {
+  padding-top: 70px;
+}

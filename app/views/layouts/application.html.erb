@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RE:FAB</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>RE:FAB</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-    <%= stylesheet_pack_tag 'application' %>
-  </head>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+  <%= stylesheet_pack_tag 'application' %>
+</head>
 
-  <body>
+<body>
+  <div class="top-space"></div>
+
+
+
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+    <div class="logo-container">
+      <%= link_to products_path, class: "navbar-brand" do %>
+      <%= cl_image_tag("REFAB-Logo-15.03_m8dzdh",
+      width: 400) %>
+      <% end %>
+    </div>
+
+    <div class="log-container">
+        <% if user_signed_in? %>
+          <% if current_user.photo.attached? %>
+            <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%= cl_image_path current_user.photo.key %>" />
+          <% else %>
+            <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+          <% end %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Account settings", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <% end %>
+    </div>
+
+  </div>
+
+
+
+  <%= render 'shared/flashes' %>
+
+  <%= yield %>
+  <% if user_signed_in? %>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-
-    <%= yield %>
-  </body>
+  <% end %>
+  <div class="bottom-space"></div>
+</body>
 </html>
