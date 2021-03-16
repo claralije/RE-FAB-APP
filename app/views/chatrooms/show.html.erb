@@ -6,65 +6,96 @@
       <% user = message.user %>
       <div class="<%= user == current_user ? "sent" : "received" %>">
 
-        <div class="image-container">
-          <% if user.photo.attached? %>
-             <%= cl_image_tag user.photo, height: 200, width: 200 %>
-          <% else %>
-              <%= image_tag "https://i.pravatar.cc/200?img=#{rand(1..20)}", class: "img", height: 200, width: 200 %>
-          <% end %>
-        </div>
+        <% if user == current_user %>
 
-        <div class="card-content">
-        <% if message.product %>
-          <div class="user-name">
-            <i><%= message.user.name %></i>
-            <p><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></p>
-          </div>
-          <div class="content">
-            <p> The product I'm interested in is: <%= message.product.title %></p>
-          </div>
+<!-- CARTE OF THE MESSAGES WE SEND -->
+        <div class="message-sent">
 
-        <% else %>
-
-          <div class="message-container" id="message-<%= message.id %>">
+          <div class="card-content">
+          <% if message.product %>
             <div class="user-name">
-              <span><%= message.user.name %></span>
-              <p><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></p>
+              <p><%= message.created_at.strftime("%l:%M%p") %></p>
             </div>
             <div class="content">
-              <%= message.content %>
+
+              <p> The product I'm interested in is: </p>
+              <%= render 'products/card', product: message.product %>
             </div>
+          <% else %>
+
+            <div class="message-container" id="message-<%= message.id %>">
+              <div class="user-name">
+                <p><%= message.created_at.strftime("%l:%M%p") %></p>
+              </div>
+              <div class="content">
+                <%= message.content %>
+              </div>
+            </div>
+          <% end %>
           </div>
-        <% end %>
         </div>
+<!-- CARTE OF THE MESSAGES WE RECEIVE -->
 
-    <% end %>
+          <% else %>
+<div class="message-received">
 
-  </div>
+          <div class="card-content">
+          <% if message.product %>
+            <div class="user-name">
+              <p><%= message.created_at.strftime("%l:%M%p") %></p>
+            </div>
+            <div class="content">
+              <p> The product I'm interested in is: </p>
+              <%= render 'products/card', product: message.product %>
+            </div>
+
+          <% else %>
+
+            <div class="message-container" id="message-<%= message.id %>">
+              <div class="user-name">
+                <p><%= message.created_at.strftime("%l:%M%p") %></p>
+              </div>
+              <div class="content">
+                <%= message.content %>
+              </div>
+            </div>
+          <% end %>
+          </div>
 </div>
 
-<!-- PRODUCT BUTTON CTACTION -->
-  <div>
 
-  <% @products.each do |product| %>
-    <% if !product.deal && product.user != current_user %>
+        <% end %>
 
-    <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
-    <% end %>
-  <% end %>
 
-  <% if @deal && current_user != @deal.user %>
-  <%= link_to "Accept", in_process_path(@deal), method: :post %>
-  <% end %>
+
+
   </div>
+ <% end %>
+
+<!-- PRODUCT BUTTON CTACTION -->
+  <div class="button_cta buy">
+    <% @products.last(1).each do |product| %>
+      <% if !product.deal && product.user != current_user %>
+
+      <%= link_to "Buy product", product_deals_path(product), method: :post %>
+      <% end %>
+    <% end %>
+
+    <% if @deal && current_user != @deal.user %>
+    <%= link_to "Accept", in_process_path(@deal), method: :post %>
+    <% end %>
+  </div>
+</div>
 
 
 
   <!-- SUBMIT -->
 
   <%= simple_form_for [ @chatroom, @message ] do |f| %>
-    <%= f.input :content, label: false, placeholder: "Is the product still available ?" %>
-    <%= f.button :submit, 'Send', class: 'button_transparent' %>
+  <div class="form-module">
+    <%= f.input :content, label: false, placeholder: "Is the product still available ?", wrapper_html: { class: 'input' }, input_html: { class: 'textarea' } %>
+    <%= f.button :submit, 'Send', class: 'button_selected' %>
+  </div>
   <% end %>
 
 
