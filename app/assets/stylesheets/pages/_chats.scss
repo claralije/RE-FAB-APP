@@ -1,0 +1,42 @@
+.msg-container {
+  padding: 8px 8px;
+  a:hover {
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 16px;
+  }
+}
+
+.chat-card {
+  display: flex;
+  padding: 8px 4px;
+  border-bottom: 1px solid #ced4da;
+  position: relative;
+  img {
+    border-radius: 50%;
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+.card-content {
+  margin-left: 8px;
+  .content {
+    font-size: 12px;
+
+  }
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.date {
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  z-index: 10px;
+  font-size: 12px;
+}

@@ -1,5 +1,33 @@
-<div> All your conversations </div>
+<div class="msg-container">
 
-<% @chatrooms.each do |chatroom| %>
-  <%= link_to "conversation with #{chatroom.other_user(current_user).name}", chatroom_path(chatroom)%>
-  <% end %>
+<h1> All your conversations </h1>
+
+  <div class="chats">
+
+  <% @chatrooms.each do |chatroom| %>
+    <%= link_to chatroom_path(chatroom) do %>
+    <div class="chat-card">
+      <div class="image-container">
+        <% if chatroom.other_user(current_user).photo.attached? %>
+           <%= cl_image_tag chatroom.other_user(current_user).photo, height: 200, width: 200 %>
+        <% else %>
+            <%= image_tag "https://i.pravatar.cc/200?img=#{rand(1..40)}", class: "img", height: 200, width: 200 %>
+        <% end %>
+      </div>
+      <div class="card-content">
+        <div class="user-name">
+        <%= "#{chatroom.other_user(current_user).name}"%>
+        </div>
+        <div class="content">
+        <%= "#{chatroom.messages.last.content.truncate_words(12)}..." %>
+      </div>
+      </div>
+
+      <div class="date">
+        <%= "#{chatroom.messages.last.created_at.strftime("%m/%d/%Y")}"%>
+      </div>
+    </div>
+      <% end %>
+      <% end %>
+  </div>
+</div>
