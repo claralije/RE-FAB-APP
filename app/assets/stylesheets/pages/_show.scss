@@ -17,7 +17,7 @@
 }
 .show-user-bio {
   border-bottom: 1px solid black;
-  padding: 16px 16px 0px 16px;
+  padding: 16px 16px 16px 16px;
 }
 
 .show-user-shop {
@@ -37,6 +37,14 @@
 
 .show-user-favorites {
   padding: 16px 16px 0px 16px;
+}
+
+.user-edit {
+  a {
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+  }
 }
 
 .show-product-photos {
