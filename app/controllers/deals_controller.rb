@@ -15,7 +15,7 @@ def show
     @chatroom = @product.message.chatroom
     authorize @deal
     if @deal.save
-      flash[:notice] = "The deal has been confirmed"
+      Message.create(user: current_user, content: "#{current_user.name} confirmed the deal", chatroom: @chatroom )
       redirect_to chatroom_path(@chatroom)
     else
       @message = Message.new
