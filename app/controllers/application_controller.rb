@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pundit
     # [...]
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :set_notifications_count
   # Pundit: white-list approach.
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
 
@@ -22,7 +22,17 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    user_path(current_user) # your path
+    products_path # your path
+  end
+
+  def set_notifications_count
+    if user_signed_in?
+    my_product_deals = Deal.joins(:product).where('products.user_id = ?', current_user.id)
+    @notification_count = my_product_deals.where(status: 'pending').count
+  else
+    @notification_count = 0
+  end
+
   end
 
   private
