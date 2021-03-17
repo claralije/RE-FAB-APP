@@ -1,4 +1,5 @@
   <div class="product-card" id="product-<%= product.id %>">
+    <a class="anchor" id="top"></a>
     <%= link_to product do %>
     <div class="image">
       <% if product.photos.any? %>
@@ -32,11 +33,11 @@
   </div>
   <% if controller_name != 'chatrooms' %>
     <% if current_user.has_favorite(product) %>
-      <%= link_to favorite_path(current_user.has_favorite(product)), class: "fav" , method: :delete do %>
+      <%= link_to favorite_path(current_user.has_favorite(product)), class: "fav" , method: :delete, remote: true do %>
         <i class="fas fa-heart"></i>
       <% end %>
     <% else %>
-      <%= link_to product_favorites_path(product.id), class: "fav", method: :post do %>
+      <%= link_to product_favorites_path(product.id), class: "fav", method: :post, remote: true do %>
         <i class="far fa-heart"></i>
       <% end %>
     <% end %>

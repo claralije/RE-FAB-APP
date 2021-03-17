@@ -11,7 +11,11 @@ class FavoritesController < ApplicationController
     @favorite.user = current_user
     authorize @favorite
     @favorite.save
-    redirect_to choose_redirection
+    # redirect_to choose_redirection
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def destroy
@@ -20,7 +24,11 @@ class FavoritesController < ApplicationController
     authorize @favorite
     @favorite.destroy
 
-    redirect_to choose_redirection
+    # redirect_to choose_redirection
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private
