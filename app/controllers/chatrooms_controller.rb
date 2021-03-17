@@ -16,8 +16,13 @@ class ChatroomsController < ApplicationController
 
   def create
     #careful, inplement an if statement with params user_id when entry point is user profile
-    @product = Product.find(params[:product_id])
-    @chatroom = Chatroom.new(user_a: current_user, user_b: @product.user)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @product = Product.find(params[:product_id])
+      @user =  @product.user
+    end
+    @chatroom = Chatroom.new(user_a: current_user, user_b: @user)
     authorize @chatroom
     @chatroom.save
     @message = Message.create(user: current_user, content: 'Is the product still available ?', product: @product, chatroom: @chatroom)

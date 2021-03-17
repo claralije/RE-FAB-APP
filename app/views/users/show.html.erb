@@ -3,7 +3,8 @@
     <h4><%= link_to "⌫ B A C K", products_path %></h4>
    </div>
 
-   <div class="show-user-info">
+
+
       <div class="show-user-header">
         <h1><strong>Hello <%= @user.name %></strong></h1>
         <p>Location: <%= @user.location %></p>
@@ -17,6 +18,7 @@
           <div class="show-image" style="background-image: url('')">
         <% end %>
       </div>
+
       <div class="show-user-bio">
         <h2><strong>BIO /</strong></h2>
         <p><em>"<%= @user.bio %>"</em></p>
@@ -27,18 +29,16 @@
         <% end %>
       </div>
 
-  <% if @user != current_user %>
-    <div class="user-message">
-      <% if policy(Chatroom.new(user_a: current_user, user_b: @user)).create? %>
-        <%=link_to "✎ MESSAGE", chatrooms_path, method: :post  %>
-        <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
-      <% elsif current_user.chat_with(@user) %>
-        <%=link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@user)) %>
+      <% if @user != current_user %>
+        <div class="user-message">
+          <% if policy(Chatroom.new(user_a: current_user, user_b: @user)).create? %>
+            <%=link_to "✎ MESSAGE", chatrooms_path(user_id: @user.id), method: :post  %>
+            <%#= link_to '/ MESSAGE', chatroom_path(current_user.chat_with(@product.user)) %>
+          <% elsif current_user.chat_with(@user) %>
+            <%=link_to "✎ MESSAGE", chatroom_path(current_user.chat_with(@user)) %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
-
-  <% end %>
-
 
       <div class="show-user-shop">
         <% if @user == current_user %>
@@ -62,7 +62,6 @@
               </div>
               <% end %>
             <% end %>
-          </div>
           </div>
         </div>
 

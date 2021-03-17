@@ -1,16 +1,16 @@
 .deal-card {
-  border: 1px solid black;
+  border: 1px solid $gray;
 }
 
 .deal-header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 0px 8px 16px;
   background-color: black;
   color: white;
 }
 
 .deal-product-info {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 8px 8px 16px;
 }
 
@@ -40,7 +40,7 @@
   .deal-message {
     margin-bottom: 8px;
     padding: 8px 1px 1px 16px;
-    border: 1px solid black;
+    border: 1px solid $gray;
     display: flex;
     justify-content: center;
     margin-top: 24px;
@@ -49,7 +49,7 @@
   .deal-review {
     margin: 24px 0px 16px 0px;
     padding: 16px 24px 16px 24px;
-    border: 1px solid black;
+    border: 1px solid $gray;
     .btn {
       background-color: black;
       color: white;
