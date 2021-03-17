@@ -5,9 +5,9 @@
 
    <div class="show-user-info">
       <div class="show-user-header">
-        <h1><strong><%= @user.name %></strong></h1>
-        <p><%= @user.location %></p>
-        <p>/ <%= @user.school %></p>
+        <h1><strong>Hello <%= @user.name %></strong></h1>
+        <p>Location: <%= @user.location %></p>
+        <p>School: <%= @user.school %></p>
       </div>
 
       <div>
@@ -102,14 +102,12 @@
                 </div>
             </div>
             <div class="users-deals-two">
+                <h3><strong> By others, to you / </strong></h3>
               <div class="product-scroll">
                 <div class="cards">
-                  <div class="others-deals">
-                    <h3><strong> By others, to you / </strong></h3>
                     <% @my_product_deals.each do |deal| %>
                       <%= render 'deals/card', deal: deal, product: deal.product %>
                     <% end %>
-                  </div>
                 </div>
               </div>
               <% end %>

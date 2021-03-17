@@ -1,4 +1,8 @@
 <div class="container">
+    <div class="show-user-header">
+      <h1>Welcome to Re-FAB</h1>
+      <p>Please, fill the information bellow to start using the app</p>
+      </div>
   <div class="card new-product">
     <%= simple_form_for(@user) do |f| %>
     <%= f.input :photo, as: :file %>
@@ -7,7 +11,7 @@
     <%= f.input :school, collection: User::SCHOOLS %>
     <%= f.input :phone_number %>
     <%= f.input :bio %>
-    <%= f.button :submit %>
+    <%= f.submit 'Submit', class: 'button_selected' %>
     <% end %>
   </div>
 </div>

@@ -10,24 +10,49 @@
   }
 }
 .show-product-info {
-  border: 1px solid black;
+  border: 1px solid $gray;
 }
 
 .show-user-info {
-  border: 1px solid black;
+  border: 1px solid $gray;
 }
 
 .show-user-header {
-  padding: 16px 16px 0px 16px;
+  padding: 16px 16px 0px 10px;
+  h1 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  p {
+    margin-bottom: 8px;
+  }
+  strong {
+    // border-bottom: 1px solid $gray;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
 }
 .show-user-bio {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 16px 24px 16px;
+  h2 {
+    font-size: 20px;
+  }
+}
+
+.show-user-deals {
+  padding: 16px 16px 8px 16px;
+}
+.quit {
+  margin-top: 8px;
 }
 
 .show-user-shop {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 16px 0px 16px;
+  h3 {
+    font-size: 20px;
+  }
 }
 
 #user-shop {
@@ -37,46 +62,57 @@
 }
 
 .show-user-reviews {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 16px 0px 16px;
+  h3 {
+    font-size: 20px;
+  }
 }
 
 .show-user-favorites {
   padding: 16px 16px 0px 16px;
-  border-top: 1px solid black;
+  border-top: 1px solid $gray;
+  h3 {
+    font-size: 20px;
+  }
 }
 
 
 .user-edit {
   a {
-    background-color: black;
+    padding: 8px 8px;
+    background-color: $gray;
     color: white;
-    padding: 10px 32px;
-    font-size: 16px;
+    border: none;
   }
 }
 
 .users-deals {
-  padding: 16px 16px 8px 16px;
+  h3 {
+    font-size: 20px;
+  }
 }
 
 .show-product-photos {
     img {
     width: 100%;
-    border-top: 1px solid black;
+    border-top: 1px solid $gray;
     padding: 8px 8px 8px 8px;
   }
 }
 
 .show-product-header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $gray;
   padding: 16px 16px 0px 16px;
+  h1 {
+    font-size: 20px;
+  }
 }
 
 .show-image {
   height: 352px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid $gray;
+  border-bottom: 1px solid $gray;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -95,6 +131,9 @@
   p {
     font-size: 20px;
   }
+  h2 {
+    font-size: 20px;
+  }
 }
 
 .show-fabric-price {
@@ -102,32 +141,39 @@
   justify-content: space-between;
   padding-bottom: 8px;
   .show-fabric {
-    background-color: black;
+    background-color: $gray;
     color: white;
-    border: 1px solid black;
+    border: 1px solid $gray;
     flex: 0 0 50%;
     display: flex;
     align-items: center;
-    padding: 16px 0px 0px 16px;
-    font-size: 22px;
+    padding: 12px 0px 0px 12px;
+    font-size: 20px;
     text-transform: capitalize;
   }
   .show-price {
     flex: 0 0 50%;
     display: flex;
     align-items: center;
-    padding: 16px 0px 0px 16px;
-    font-size: 24px;
+    padding: 12px 0px 0px 12px;
+    font-size: 20px;
   }
 }
 
 .show-buttons {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid black;
+  border-top: 1px solid $gray;
+  padding: 8px 8px;
+  background-color: $gray;
+  color: white;
+  border: none;
+  a {
+    color: white;
+  }
 
   div{
-    border-right: 1px solid black;
+    border-right: 1px solid $gray;
     display: flex;
     justify-content: center;
     flex: 0 0 50%;
