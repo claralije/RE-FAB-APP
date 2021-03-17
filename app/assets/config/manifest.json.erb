@@ -1,0 +1,17 @@
+{
+  "background_color": "white",
+  "description": "Re-Fab brings together creative people who have fabric to get rid of and people looking for fabric to give them a second life",
+  "display": "fullscreen",
+  "name": "Re-FAB",
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ]
+}

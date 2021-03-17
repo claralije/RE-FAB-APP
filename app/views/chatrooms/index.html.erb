@@ -9,7 +9,7 @@
     <div class="chat-card">
       <div class="image-container">
         <% if chatroom.other_user(current_user).photo.attached? %>
-           <%= cl_image_tag chatroom.other_user(current_user).photo, height: 200, width: 200 %>
+           <%= cl_image_tag chatroom.other_user(current_user).photo.key, height: 200, width: 200 %>
         <% else %>
             <%= image_tag "https://i.pravatar.cc/200?img=#{rand(1..40)}", class: "img", height: 200, width: 200 %>
         <% end %>

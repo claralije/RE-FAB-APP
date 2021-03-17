@@ -80,7 +80,7 @@
     <% @products.each do |product| %>
       <% if !product.deal && product.user != current_user %>
         <div class="button_cta buy">
-            <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
+            <%= link_to "Deal", product_deals_path(product), method: :post %>
         </div>
       <% elsif product.deal && product.deal.user == current_user && product.deal.status == 'in_process' %>
       <div class="button_cta buy">
