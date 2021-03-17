@@ -30,6 +30,23 @@
     </div>
 
     <div class="log-container">
+      <div class="notifications">
+          <% if @notification_count == 0 %>
+            <%= link_to user_path(current_user, anchor: 'deal-notif'), class: "nav-link" do %>
+            <i
+            id="bell-black" class="far fa-bell">
+            </i>
+            <% end %>
+            <% else %>
+            <%= link_to user_path(current_user, anchor: 'deal-notif'), class: "nav-link" do %>
+            <i
+            id="bell-red" class="far fa-bell">
+            </i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="user-photo">
         <% if user_signed_in? %>
           <% if current_user.photo.attached? %>
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%= cl_image_path current_user.photo.key %>" />
@@ -43,6 +60,7 @@
           <% else %>
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           <% end %>
+          </div>
     </div>
 
   </div>
