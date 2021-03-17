@@ -15,10 +15,13 @@
 
 .show-user-info {
   border: 1px solid $gray;
+  border: 1px solid $gray;
+  border-bottom: none;
 }
 
 .show-user-header {
   padding: 16px 16px 0px 10px;
+  border: 1px solid $gray;
   h1 {
     font-size: 22px;
     margin-bottom: 16px;
@@ -33,7 +36,9 @@
   }
 }
 .show-user-bio {
-  border-bottom: 1px solid $gray;
+  border: 1px solid $gray;
+  border-top: none;
+  border-bottom: none;
   padding: 16px 16px 24px 16px;
   h2 {
     font-size: 20px;
@@ -42,13 +47,17 @@
 
 .show-user-deals {
   padding: 16px 16px 8px 16px;
+  border: 1px solid $gray;
+  border-top: none;
+
 }
 .quit {
   margin-top: 8px;
 }
 
 .show-user-shop {
-  border-bottom: 1px solid $gray;
+  border-top: none;
+    border: 1px solid $gray;
   padding: 16px 16px 0px 16px;
   h3 {
     font-size: 20px;
@@ -57,13 +66,14 @@
 
 #user-shop {
   a {
-    font-size: 1.75rem;
+    font-size: 20px;
   }
 }
 
 .show-user-reviews {
-  border-bottom: 1px solid $gray;
-  padding: 16px 16px 0px 16px;
+    border: 1px solid $gray;
+    padding: 16px 16px 0px 16px;
+    border-top: none;
   h3 {
     font-size: 20px;
   }
@@ -71,7 +81,8 @@
 
 .show-user-favorites {
   padding: 16px 16px 0px 16px;
-  border-top: 1px solid $gray;
+  border: 1px solid $gray;
+  border-top: none;
   h3 {
     font-size: 20px;
   }
@@ -111,8 +122,8 @@
 
 .show-image {
   height: 352px;
-  border-top: 1px solid $gray;
-  border-bottom: 1px solid $gray;
+  border: 1px solid $gray;
+  border-top: none;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
