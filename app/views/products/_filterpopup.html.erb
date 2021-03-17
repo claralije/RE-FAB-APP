@@ -1,7 +1,7 @@
 <!-- Button trigger modal -->
 <div class="filters-button">
-<i type="" id="filterbutton" class="fas fa-filter" data-toggle="modal" data-target="#exampleModal">
-</i>
+  <i type="" id="filterbutton" class="fas fa-filter" data-toggle="modal" data-target="#exampleModal">
+  </i>
 </div>
 
 <!-- Modal -->
@@ -17,79 +17,81 @@
       <div class="modal-body">
         <!-- FILTERS SECTION  -->
 
-  <%= form_tag products_path, method: :get do %>
-    <%= text_field_tag :location,
-      params[ :location],
-      class: "form-control",
-      placeholder: "Location"
-    %>
-  <%= text_field_tag :query,
-    params[ :query],
-    class: "form-control",
-    placeholder: "Find a user"
-  %>
+        <%= form_tag products_path, method: :get do %>
+        <%= text_field_tag :location,
+        params[ :location],
+        class: "form-control",
+          placeholder: "Location"
+          %>
+          <%= text_field_tag :query,
+          params[ :query],
+          class: "form-control",
+            placeholder: "Find a user"
+            %>
 
-<div class="filtering">
+            <div class="filtering">
 
-  <h5> Fabric </h5>
-  <div class="filter-box">
-    <% Product::FABRICS.each do |fabric| %>
-    <div>
-      <input type="checkbox" hidden value="<%= fabric %>" name="fabric[]" id="<%= fabric %>">
-      <label class="" for="<%= fabric %>"><%= fabric.titleize %></label>
-    </div>
-    <% end %>
-  </div>
+              <h5> Fabric </h5>
+              <div class="filter-box">
+                <% Product::FABRICS.each do |fabric| %>
+                <div>
+                  <input type="checkbox" hidden value="<%= fabric %>" name="fabric[]" id="<%= fabric %>">
+                  <label class="" for="<%= fabric %>"><%= fabric.titleize %></label>
+                </div>
+                <% end %>
+              </div>
 
-  <h5> Condition </h5>
-  <div class="filter-box">
-        <% Product::CONDITIONS.each do |condition| %>
-        <div>
-          <input type="checkbox" hidden value="<%= condition %>" name="condition[]" id="<%= condition %>">
-          <label class="" for="<%= condition %>"><%= condition.titleize %></label>
+              <h5> Condition </h5>
+              <div class="filter-box">
+                <% Product::CONDITIONS.each do |condition| %>
+                <div>
+                  <input type="checkbox" hidden value="<%= condition %>" name="condition[]" id="<%= condition %>">
+                  <label class="" for="<%= condition %>"><%= condition.titleize %></label>
+                </div>
+                <% end %>
+              </div>
+
+              <h5> Color </h5>
+              <div class="filter-box">
+                <% Product::COLORS.each do |color| %>
+                <div>
+                  <input type="checkbox" hidden value="<%= color %>" name="color[]" id="<%= color %>">
+                  <label class="" for="<%= color %>"><%= color.titleize %></label>
+                </div>
+                <% end %>
+              </div>
+
+              <h5> Price </h5>
+              <div class="filter-box">
+                <% [[1,10],[11,20],[21,30],[31,40],[41,50],[51,'++']].each do |price| %>
+                <div>
+                  <input type="checkbox" hidden value="<%= price[1] %>" name="price[]" id="<%= price %>">
+                  <label class="" for="<%= price %>">From <%= price[0] %> to <%= price[1] %></label>
+                </div>
+                <% end %>
+              </div>
+
+              <h5> Quantity </h5>
+              <div class="filter-box">
+                <% [[1,10],[11,20],[21,30],[31,40],[41,'++']].each do |quantity| %>
+                <div>
+                  <input type="checkbox" hidden value="<%= quantity[1] %>" name="quantity[]" id="<%= quantity %>">
+                  <label class="" for="<%= quantity %>"><%= quantity[0] %> - <%= quantity[1] %> meters </label>
+                </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <%= submit_tag  "Search", class: "button_cta" %>
+              <% end %>
+            </div>
+          </div>
+
+
         </div>
-        <% end %>
-  </div>
-
-  <h5> Color </h5>
-  <div class="filter-box">
-        <% Product::COLORS.each do |color| %>
-        <div>
-          <input type="checkbox" hidden value="<%= color %>" name="color[]" id="<%= color %>">
-          <label class="" for="<%= color %>"><%= color.titleize %></label>
-        </div>
-        <% end %>
-  </div>
-
-  <h5> Price </h5>
-  <div class="filter-box">
-        <% [[1,10],[11,20],[21,30],[31,40],[41,50],[51,'++']].each do |price| %>
-        <div>
-          <input type="checkbox" hidden value="<%= price[1] %>" name="price[]" id="<%= price %>">
-          <label class="" for="<%= price %>">From <%= price[0] %> to <%= price[1] %></label>
-        </div>
-        <% end %>
-  </div>
-
-  <h5> Quantity </h5>
-  <div class="filter-box">
-        <% [[1,10],[11,20],[21,30],[31,40],[41,'++']].each do |quantity| %>
-        <div>
-          <input type="checkbox" hidden value="<%= quantity[1] %>" name="quantity[]" id="<%= quantity %>">
-          <label class="" for="<%= quantity %>"><%= quantity[0] %> - <%= quantity[1] %> meters </label>
-        </div>
-        <% end %>
-  </div>
-</div>
       </div>
-
-      <div class="modal-footer">
-        <%= submit_tag  "Search", class: "button_cta" %>
-        <% end %>
-      </div>
     </div>
-  </div>
-</div>
 
 
 
