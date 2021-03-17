@@ -56,6 +56,14 @@ class ProductsController < ApplicationController
       @products = @products.where(quantity: quantity_range.flatten)
     end
 
+    if params[:my_products].present?
+      @products = Product.where(user: current_user)
+    end
+
+    if params[:user_id].present?
+      @products = Product.where(user_id: params[:user_id])
+    end
+
     @markers = @products.geocoded.map do |product|
       {
         lat: product.latitude,
@@ -81,7 +89,7 @@ class ProductsController < ApplicationController
     @product.user = current_user
     authorize @product
     if @product.save
-      redirect_to products_path(@products)
+      redirect_to products_path(my_products: true)
     else
       render 'new'
     end

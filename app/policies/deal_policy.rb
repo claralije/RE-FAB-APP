@@ -20,4 +20,8 @@ class DealPolicy < ApplicationPolicy
   def in_process?
     user && user == record.product.user && record.status != 'in_process'
   end
+
+  def rejected?
+    user && user == record.product.user && record.status != 'rejected'
+  end
 end

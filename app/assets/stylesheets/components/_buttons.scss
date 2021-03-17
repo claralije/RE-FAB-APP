@@ -29,3 +29,21 @@
   color: $gray;
   border: none;
 }
+
+  .reject-button {
+    padding: 8px 8px;
+    background-color: $red;
+    color: white;
+    border: none;
+  }
+
+.deal-sold-button {
+  margin-top: 24px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+    a {
+    color: white;
+    padding: 8px;
+    }
+}

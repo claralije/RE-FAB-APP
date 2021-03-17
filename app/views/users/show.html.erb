@@ -41,8 +41,11 @@
 
 
       <div class="show-user-shop">
-        <h3><strong><%= @user == current_user ? "Your" : "#{@user.name}'s" %> Shop /</strong></h3>
-
+        <% if @user == current_user %>
+        <h3 id="user-shop"><strong><%= link_to "Your Shop >>", products_path(my_products: true) %></strong></h3>
+        <% else %>
+        <h3 id="user-shop"><strong><%= link_to "#{@user.name}'s Shop >>", products_path(user_id: @user.id) %></strong></h3>
+        <% end %>
         <% if @user.products.empty? %>
           <p>Nothing for sale yet. <u><%= link_to "Add your first item now!", new_product_path %></u></p>
         <% else %>
@@ -98,20 +101,19 @@
                     </div>
                 </div>
             </div>
-            <div class="product-scroll">
-              <div class="cards">
-                <div class="others-deals">
-                  <h3><strong> By others, to you / </strong></h3>
-                  <% @my_product_deals.each do |deal| %>
-                    <%= render 'deals/card', deal: deal, product: deal.product %>
-                    <% if deal.product.status != 'sold'%>
-                    <%= link_to 'Mark as sold', closed_path(deal), method: :post %>
-                    <% end  %>
-                  <% end %>
+            <div class="users-deals-two">
+              <div class="product-scroll">
+                <div class="cards">
+                  <div class="others-deals">
+                    <h3><strong> By others, to you / </strong></h3>
+                    <% @my_product_deals.each do |deal| %>
+                      <%= render 'deals/card', deal: deal, product: deal.product %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
+              <% end %>
             </div>
-            <% end %>
           </div>
          <% end %>
 

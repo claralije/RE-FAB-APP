@@ -80,18 +80,18 @@
     <% @products.each do |product| %>
       <% if !product.deal && product.user != current_user %>
         <div class="button_cta buy">
-            <%= link_to "Buy #{product.title}", product_deals_path(product), method: :post %>
+          <%= link_to "SEND DEAL REQUEST TO // #{product.user.name}", product_deals_path(product), method: :post %>
         </div>
       <% elsif product.deal && product.deal.user == current_user && product.deal.status == 'in_process' %>
       <div class="button_cta buy">
-            <a> <%= product.title %> is in process </a>
+            <a> ✓ <%= product.user.name %> HAS CONFIRMED YOUR ORDER. <%= product.title %> IS BEING PROCESSED. </a>
         </div>
       <% end %>
     <% end %>
 
     <% if @deal&.status == "pending" && current_user != @deal.user %>
       <div class="button_cta buy">
-        <%= link_to "Accept #{@deal.product.title}", in_process_path(@deal), method: :post %>
+        <%= link_to "ACCEPT DEAL REQUEST FROM // #{@deal.product.title}", in_process_path(@deal), method: :post %>
       </div>
     <% end %>
 </div>
