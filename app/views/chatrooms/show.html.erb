@@ -8,7 +8,7 @@
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.each do |message| %>
       <% user = message.user %>
-      <div class="<%= user == current_user ? "sent" : "received" %>">
+      <div class="<%= user == current_user ? "sent" : "received" %>" id="messages-ajax">
 
         <% if user == current_user %>
 
@@ -100,7 +100,7 @@
 
   <!-- SUBMIT -->
 
-  <%= simple_form_for [ @chatroom, @message ] do |f| %>
+  <%= simple_form_for([ @chatroom, @message ], remote: true) do |f| %>
   <div class="form-module">
     <%= f.input :content, label: false, placeholder: "Is the product still available ?", wrapper_html: { class: 'input' }, input_html: { class: 'textarea' } %>
     <%= f.button :submit, 'Send', class: 'button_selected' %>
