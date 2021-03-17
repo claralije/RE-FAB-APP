@@ -97,6 +97,11 @@
                       <% @closed_deals.each do |deal| %>
                         <%= render 'deals/card', deal: deal, product: deal.product %>
                       <% end %>
+
+                      <% @in_process_deals.each do |deal| %>
+                        <%= render 'deals/card', deal: deal, product: deal.product %>
+                      <% end %>
+
                     </div>
                 </div>
             </div>
