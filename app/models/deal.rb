@@ -1,6 +1,6 @@
 class Deal < ApplicationRecord
 
-STATUS = ['pending', 'in_process', 'closed']
+STATUS = ['pending', 'in_process', 'closed', 'rejected']
 
   belongs_to :product
   belongs_to :user

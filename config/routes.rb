@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   post 'deals/:id/in_process', to: 'deals#in_process', as: 'in_process'
+  post 'deals/:id/rejected', to: 'deals#rejected', as: 'rejected'
   post 'deals/:id/closed', to: 'deals#closed', as: 'closed'
 end
 

@@ -40,6 +40,9 @@
   }
 }
 
+.show-user-deals {
+  padding: 16px 16px 8px 16px;
+}
 .quit {
   margin-top: 8px;
 }
@@ -49,6 +52,12 @@
   padding: 16px 16px 0px 16px;
   h3 {
     font-size: 20px;
+  }
+}
+
+#user-shop {
+  a {
+    font-size: 1.75rem;
   }
 }
 
@@ -79,7 +88,6 @@
 }
 
 .users-deals {
-  padding: 16px 16px 8px 16px;
   h3 {
     font-size: 20px;
   }

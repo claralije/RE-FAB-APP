@@ -1,6 +1,6 @@
 class DealsController < ApplicationController
 
-def show
+  def show
     @deal = Deal.find(params[:id])
     @review = Review.new(deal: @deal)
 
@@ -15,7 +15,7 @@ def show
     @chatroom = @product.message.chatroom
     authorize @deal
     if @deal.save
-      Message.create(user: current_user, content: "#{current_user.name} confirmed the deal", chatroom: @chatroom )
+      Message.create(user: current_user, content: "✓ DEAL REQUEST SUCCESFULLY SENT. AWAITING RESPONSE FROM // #{@deal.product.user.name}", chatroom: @chatroom )
       redirect_to chatroom_path(@chatroom)
     else
       @message = Message.new
@@ -36,9 +36,22 @@ def show
     @deal = Deal.find(params[:id])
     authorize @deal
     @chat = current_user.chat_with(@deal.user)
-    Message.create(user: current_user, content: "#{current_user.name} has approved your Deal. It is now in process", chatroom: @chat )
+    Message.create(user: current_user, content: "✓ #{current_user.name} HAS APPROVED YOUR DEAL REQUEST. THEY WILL NOW PROCESS YOUR ORDER.", chatroom: @chat )
 
     @deal.status = 'in_process'
+
+    @deal.save
+
+    redirect_to @chat
+  end
+
+  def rejected
+    @deal = Deal.find(params[:id])
+    authorize @deal
+    @chat = current_user.chat_with(@deal.user)
+    Message.create(user: current_user, content: "X #{current_user.name} HAS REJECTED YOUR DEAL REQUEST. YOUR ORDER CANNOT BE PROCESSED.", chatroom: @chat )
+
+    @deal.status = 'rejected'
 
     @deal.save
 

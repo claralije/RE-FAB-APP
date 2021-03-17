@@ -20,11 +20,23 @@
   </div>
 
     <% if current_user == @deal.product.user %>
-    <div class="accept-reject">
-      <div class="button_cta buy">
-        <%= link_to "Accept #{@deal.product.title}", in_process_path(@deal), method: :post %>
-      </div>
-    </div>
+      <% if @deal.status == 'pending' %>
+        <div class="accept-reject">
+          <div class="button_cta">
+          <!-- if STATUS = PENDING, then have a button that says 'ACCEPT'-->
+            <%= link_to "✓ ACCEPT", in_process_path(@deal), method: :post %>
+          </div>
+          <div class="reject-button">
+          <!-- if STATUS = PENDING, then have a button that say 'REJECT' -->
+          <%= link_to "X REJECT", rejected_path(@deal), method: :post %>
+          </div>
+        </div>
+      <% elsif @deal.status == 'in_process' %>
+        <!-- if STATUS = IN PROCESS, then have button that says 'MARK AS SOLD'-->
+          <div class="deal-sold-button">
+            <%= link_to 'MARK AS SOLD', closed_path(@deal), method: :post %>
+          </div>
+      <% end %>
     <% end %>
 
     <% if current_user == @deal.product.user %>
