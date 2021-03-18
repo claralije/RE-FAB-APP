@@ -7,7 +7,7 @@ Deal.destroy_all
 Product.destroy_all
 User.destroy_all
 
-cities = ["los angeles", "berlin", "paris", "pyongyang", "moscow", "canggu", "francheville", "barcelona", "singapore", "jakarta", "london", "miami", "las vegas", "ibiza"]
+cities = ["Seven Sisters, London", "Hackney, London", "Peckham, London", "Shepherd\'s Bush, London", "South Kensington, London", "Brick Lane, London", "Camden, London", "Holborn, London", "Soho, London", "Brixton, London"]
 schools = ['Central Saint Martins', 'London College Of Fashion', 'Westminster', 'Goldsmiths', 'Istituto Marangoni', 'Kingston', 'Royal College of Art']
 status = ['pending', 'in_process', 'closed']
 colors = ["White", "Yellow", "Blue", "Red", "Green", "Black", "Brown", "Azure", "Ivory", "Teal", "Silver", "Purple", "Navy blue", "Pea green", "Gray", "Orange", "Maroon", "Charcoal", "Aquamarine", "Coral", "Fuchsia", "Wheat", "Lime", "Crimson", "Khaki", "Hot pink", "Magenta", "Olden", "Plum", "Olive", "Cyan"]
@@ -34,7 +34,7 @@ product_status = ['available', 'sold']
 products = [
   {
     title: "QiBao Silk",
-    description: '100% genuine silk textile, ideal for traditional Chinese garments and especially Chinese New Year.',
+    description: 'Genuine silk textile, ideal for traditional Chinese garments and especially Chinese New Year.',
     fabric: 'silk',
     color: 'Red',
     weight: rand(1...10),
@@ -44,10 +44,7 @@ products = [
     location: cities.sample,
     user: User.all.sample,
     price: rand(20...50)
-  }
-]
-
-products = [
+  },
   {
     title: "Calico",
     description: 'I am pivoting away from fashion and need to get rid of all this calico that I bought to toile with. Happy to negotiate on price as I want them all gone.',
@@ -65,7 +62,7 @@ products = [
     title: "Hessian",
     description: 'Bought this for a potato sack photoshoot, have no use for it anymore however',
     fabric: 'cotton',
-    color: 'Khaki',
+    color: 'Brown',
     weight: rand(1...10),
     condition: condition.sample,
     status: product_status.sample,
