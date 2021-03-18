@@ -85,7 +85,7 @@
               <h3><strong>Deals /</strong></h3>
               <% if @user.deals.empty? %>
                 <p>No deals yet.</p>
-              <% else %>
+              <% end %>
                 <h3><strong>By you, to others /</strong></h3>
                   <div class="product-scroll">
                     <div class="cards">
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="users-deals-two" id="deal-notif">
-                <h3><strong> By others, to you / </strong></h3>
+             <h3><strong> By others, to you / </strong></h3>
               <div class="product-scroll">
                 <div class="cards">
                     <% @my_product_deals.each do |deal| %>
@@ -114,7 +114,6 @@
                     <% end %>
                 </div>
               </div>
-              <% end %>
             </div>
           </div>
          <% end %>
