@@ -15,6 +15,8 @@ gem 'puma', '~> 4.1'
 gem 'turbolinks_render'
 gem 'pundit'
 
+gem 'omniauth-facebook'
+
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
@@ -37,7 +39,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
