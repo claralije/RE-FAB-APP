@@ -50,7 +50,9 @@
 
       <div class="user-photo">
         <% if user_signed_in? %>
-          <% if current_user.photo.attached? %>
+          <% if current_user.facebook_picture_url %>
+              <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%= current_user.facebook_picture_url %>" />
+          <% elsif current_user.photo.attached? %>
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="<%= cl_image_path current_user.photo.key %>" />
           <% else %>
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
