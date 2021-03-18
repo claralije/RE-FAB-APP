@@ -4,7 +4,8 @@ class Product < ApplicationRecord
   CONDITIONS = ['new', 'used']
   STATUS = ['available', 'sold']
   COLORS = ["White", "Yellow", "Blue", "Red", "Green", "Brown", "Purple", "Gray", "Orange", "pink", "Black"]
-
+  PRICE_OPTIONS = [[1,10],[11,20],[21,30],[31,40],[41,50],[51,'++']]
+  QUANTITY = [[1,10],[11,20],[21,30],[31,40],[41,'++']]
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 

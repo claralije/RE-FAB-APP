@@ -6,7 +6,29 @@
 
 <%= render 'filterpopup' %>
 
+<div class="filters">
+  <% [:fabric, :price, :color, :condition,:location, :query, :quantity].each do |attr| %>
+    <% if params[attr].present? %>
 
+      <% if params[attr].is_a?(Array) %>
+        <% params[attr].each do |type| %>
+          <% if attr == :price %>
+            <% target_p = Product::PRICE_OPTIONS.find { |o| o[-1].to_s == type } %>
+            <div>#<%= target_p[0] %>£ - <%= target_p[-1] %>£</div>
+          <% elsif attr == :quantity %>
+            <% target_q = Product::QUANTITY.find { |o| o[-1].to_s == type } %>
+            <div>#<%= target_q[0] %>m - <%= target_q[-1] %>m</div>
+          <% else %>
+            <div>#<%= type %> </div>
+          <% end %>
+
+        <% end %>
+      <% else %>
+          <div>#<%= params[attr] %> </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 <!-- PRODUCTS SECTION  -->
 
 <div class="cards">
