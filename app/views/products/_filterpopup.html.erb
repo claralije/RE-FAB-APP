@@ -34,9 +34,10 @@
               <h5> Fabric </h5>
               <div class="filter-box">
                 <% Product::FABRICS.each do |fabric| %>
+                <% is_selected = params["fabric"].present? &&  params["fabric"].include?(fabric) %>
                 <div>
-                  <input type="checkbox" hidden value="<%= fabric %>" name="fabric[]" id="<%= fabric %>">
-                  <label class="" for="<%= fabric %>"><%= fabric.titleize %></label>
+                  <input <%= 'checked' if is_selected %> type="checkbox" hidden value="<%= fabric %>" name="fabric[]" id="<%= fabric %>">
+                  <label class="<%= 'active' if is_selected %>" for="<%= fabric %>"><%= fabric.titleize %></label>
                 </div>
                 <% end %>
               </div>
@@ -44,9 +45,10 @@
               <h5> Condition </h5>
               <div class="filter-box">
                 <% Product::CONDITIONS.each do |condition| %>
+                <% is_selected = params["condition"].present? &&  params["condition"].include?(condition) %>
                 <div>
-                  <input type="checkbox" hidden value="<%= condition %>" name="condition[]" id="<%= condition %>">
-                  <label class="" for="<%= condition %>"><%= condition.titleize %></label>
+                  <input <%= 'checked' if is_selected %> type="checkbox" hidden value="<%= condition %>" name="condition[]" id="<%= condition %>">
+                  <label class="<%= 'active' if is_selected %>" for="<%= condition %>"><%= condition.titleize %></label>
                 </div>
                 <% end %>
               </div>
@@ -54,29 +56,32 @@
               <h5> Color </h5>
               <div class="filter-box">
                 <% Product::COLORS.each do |color| %>
+                <% is_selected = params["color"].present? && params["color"].include?(color)%>
                 <div>
-                  <input type="checkbox" hidden value="<%= color %>" name="color[]" id="<%= color %>">
-                  <label class="" for="<%= color %>"><%= color.titleize %></label>
+                  <input <%= 'checked' if is_selected %> type="checkbox" hidden value="<%= color %>" name="color[]" id="<%= color %>">
+                  <label class="<%= 'active' if is_selected %>" for="<%= color %>"><%= color.titleize %></label>
                 </div>
                 <% end %>
               </div>
 
               <h5> Price </h5>
               <div class="filter-box">
-                <% [[1,10],[11,20],[21,30],[31,40],[41,50],[51,'++']].each do |price| %>
+                <% Product::PRICE_OPTIONS.each do |price| %>
+                <% is_selected = params["price"].present? && params["price"].include?(price[-1].to_s)%>
                 <div>
-                  <input type="checkbox" hidden value="<%= price[1] %>" name="price[]" id="<%= price %>">
-                  <label class="" for="<%= price %>">From <%= price[0] %> to <%= price[1] %></label>
+                  <input <%= 'checked' if is_selected %> type="checkbox" hidden value="<%= price[1] %>" name="price[]" id="<%= price %>">
+                  <label class="<%= 'active' if is_selected %>" for="<%= price %>">From <%= price[0] %> to <%= price[1] %></label>
                 </div>
                 <% end %>
               </div>
 
               <h5> Quantity </h5>
               <div class="filter-box">
-                <% [[1,10],[11,20],[21,30],[31,40],[41,'++']].each do |quantity| %>
+                <% Product::QUANTITY.each do |quantity| %>
+                <% is_selected = params["quantity"].present? && params["quantity"].include?(quantity[-1].to_s)%>
                 <div>
-                  <input type="checkbox" hidden value="<%= quantity[1] %>" name="quantity[]" id="<%= quantity %>">
-                  <label class="" for="<%= quantity %>"><%= quantity[0] %> - <%= quantity[1] %> meters </label>
+                  <input <%= 'checked' if is_selected %> type="checkbox" hidden value="<%= quantity[1] %>" name="quantity[]" id="<%= quantity %>-qty">
+                  <label class="<%= 'active' if is_selected %>" for="<%= quantity %>-qty"><%= quantity[0] %> - <%= quantity[1] %> meters </label>
                 </div>
                 <% end %>
               </div>

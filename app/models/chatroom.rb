@@ -4,6 +4,7 @@ class Chatroom < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :products, through: :messages
+  has_many :deals, through: :products
 
   def other_user(user)
     if self.user_a == user

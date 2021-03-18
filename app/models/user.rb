@@ -55,4 +55,7 @@ class User < ApplicationRecord
 
     return user
   end
+  def has_pending_deals_with(other_user)
+    deals.joins(:product).where(products: {user: other_user}, deals: {status: 'pending'}).any?
+  end
 end
