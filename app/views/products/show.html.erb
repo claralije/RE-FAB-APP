@@ -12,16 +12,16 @@
 
     <div>
       <% if @product.photos.any? %>
-        <div class="show-image" style="background-image: url('<%= cl_image_path @product.photos.first.key, height: 300, width: 400, crop: :fill %>')">
+        <div id="product-<%= @product.id %>" class="show-image" style="background-image: url('<%= cl_image_path @product.photos.first.key, height: 300, width: 400, crop: :fill %>')">
       <% else %>
-        <div class="show-image" style="background-image: url('')">
+        <div id="product-<%= @product.id %>" class="show-image" style="background-image: url('')">
       <% end %>
           <% if current_user.has_favorite(@product) %>
-            <%= link_to favorite_path(current_user.has_favorite(@product)), class: "fav" , method: :delete do %>
+            <%= link_to favorite_path(current_user.has_favorite(@product)), class: "fav" , method: :delete, remote: true do %>
               <i class="fas fa-heart"></i>
             <% end %>
           <% else %>
-            <%= link_to product_favorites_path(@product.id), class: "fav", method: :post do %>
+            <%= link_to product_favorites_path(@product.id), class: "fav", method: :post, remote: true do %>
               <i class="far fa-heart"></i>
             <% end %>
           <% end %>

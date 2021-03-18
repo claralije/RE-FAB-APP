@@ -7,8 +7,8 @@
 const productCard = document.querySelector( `#product-${productId}` )
 console.log(productCard)
 
-const heart = productCard.querySelector(".fa-heart")
-const heartLink = productCard.querySelector(".fav")
+const heart = productCard?.querySelector(".fa-heart")
+const heartLink = productCard?.querySelector(".fav")
 heartLink.href = `/products/${productId}/favorites`
 heartLink.dataset.method = "post"
 heart.classList.remove("fas")
