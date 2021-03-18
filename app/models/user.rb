@@ -33,4 +33,8 @@ class User < ApplicationRecord
   def has_favorite(product)
     self.favorites.find_by(product: product)
   end
+
+  def has_pending_deals_with(other_user)
+    deals.joins(:product).where(products: {user: other_user}, deals: {status: 'pending'}).any?
+  end
 end

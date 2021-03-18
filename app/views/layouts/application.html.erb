@@ -30,6 +30,7 @@
     </div>
 
     <div class="log-container">
+      <% if user_signed_in? %>
       <div class="notifications">
           <% if @notification_count == 0 %>
             <%= link_to user_path(current_user, anchor: 'deal-notif'), class: "nav-link" do %>
@@ -45,6 +46,7 @@
           <% end %>
         <% end %>
       </div>
+    <% end %>
 
       <div class="user-photo">
         <% if user_signed_in? %>
