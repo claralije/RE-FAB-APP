@@ -20,6 +20,10 @@
   display: flex;
   justify-content: center;
   margin: 1px 0px 24px 8px;
+  img {
+    height: 180px;
+    font-weight: 180px;
+  }
 }
 
 #new_user {
@@ -38,4 +42,10 @@
 }
 .forgot {
   font-size: 14px;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
 }
