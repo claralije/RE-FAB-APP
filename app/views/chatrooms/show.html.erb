@@ -6,7 +6,7 @@
 
 <!-- ALL THE MSG -->
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-    <% @chatroom.messages.each do |message| %>
+    <% @chatroom.messages.order(created_at: :asc).each do |message| %>
       <% user = message.user %>
       <div class="<%= user == current_user ? "sent" : "received" %>" id="messages-ajax">
 
@@ -76,24 +76,28 @@
   </div>
  <% end %>
 
-<!-- PRODUCT BUTTON CTACTION -->
-    <% @products.each do |product| %>
-      <% if !product.deal && product.user != current_user %>
-        <div class="button_cta buy">
-          <%= link_to "DEAL //", product_deals_path(product), method: :post %>
-        </div>
-      <% elsif product.deal && product.deal.user == current_user && product.deal.status == 'in_process' %>
-      <div class="button_cta buy">
-            <a> ✓ <%= product.user.name %> HAS CONFIRMED YOUR ORDER. <%= product.title %> IS BEING PROCESSED. </a>
-        </div>
-      <% end %>
-    <% end %>
+<% if current_user.has_pending_deals_with(@chatroom.other_user(current_user)) ||
+  @chatroom.products.left_outer_joins(:deal).where(deals: {id: nil}).where.not(products: {user: current_user}).any? ||
+  @chatroom.deals.where(status: 'pending')
+ %>
+  <div class="button_cta buy" data-toggle="modal" data-target="#exampleModal">
+     <i class="fas fa-shopping-cart"></i> DEALS
+  </div>
+ <% end %>
 
-    <% if @deal&.status == "pending" && current_user != @deal.user %>
+<!-- PRODUCT BUTTON CTACTION -->
+<!--     <#% @products.each do |product| %>
+      <#% if !product.deal && product.user != current_user %>
+        <div class="button_cta buy">
+          <#%= link_to "/ REQUEST DEAL", product_deals_path(product), method: :post %>
+        </div>
+      <#% end %>
+    <#% end %>
+    <#% if @deal&.status == "pending" && current_user != @deal.user %>
       <div class="button_cta buy">
-        <%= link_to "ACCEPT DEAL REQUEST FROM // #{@deal.product.title}", in_process_path(@deal), method: :post %>
+        <#%= link_to "ACCEPT DEAL REQUEST FROM // #{@deal.user.name}", in_process_path(@deal), method: :post %>
       </div>
-    <% end %>
+    <#% end %> -->
 </div>
 
 
@@ -110,3 +114,50 @@
 
 
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Deals</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% @products.each do |product| %>
+          <% if !product.deal && product.user != current_user %>
+            <div class="add-deal-modal">
+              <%= link_to " + REQUEST DEAL FOR \"#{product.title}\"", product_deals_path(product), method: :post %>
+            </div>
+          <% elsif product.deal&.status == "pending" && current_user != product.deal.user %>
+                <div class=" buy">
+                  <p><em><%= product.title %></em> / <%= product.color %> <%= product.fabric %> (<%= product.condition %>)</p>
+          <div class="accept-reject">
+            <div class="button_cta">
+            <!-- if STATUS = PENDING, then have a button that says 'ACCEPT'-->
+              <%= link_to "✓ ACCEPT", in_process_path(product.deal), method: :post %>
+            </div>
+            <div class="reject-button">
+            <!-- if STATUS = PENDING, then have a button that say 'REJECT' -->
+            <%= link_to "X REJECT", rejected_path(product.deal), method: :post %>
+            </div>
+          </div>
+      </div>
+        <% end %>
+    <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

@@ -36,7 +36,7 @@ class DealsController < ApplicationController
     @deal = Deal.find(params[:id])
     authorize @deal
     @chat = current_user.chat_with(@deal.user)
-    Message.create(user: current_user, content: "✓ #{current_user.name} HAS APPROVED YOUR DEAL REQUEST. THEY WILL NOW PROCESS YOUR ORDER.", chatroom: @chat )
+    Message.create(user: current_user, content: "✓ #{current_user.name} HAS APPROVED YOUR DEAL REQUEST TO BUY \"#{@deal.product.title}\". THEY WILL NOW ARRANGE YOUR ORDER WITH YOU.", chatroom: @chat )
 
     @deal.status = 'in_process'
 
@@ -49,7 +49,7 @@ class DealsController < ApplicationController
     @deal = Deal.find(params[:id])
     authorize @deal
     @chat = current_user.chat_with(@deal.user)
-    Message.create(user: current_user, content: "X #{current_user.name} HAS REJECTED YOUR DEAL REQUEST. YOUR ORDER CANNOT BE PROCESSED.", chatroom: @chat )
+    Message.create(user: current_user, content: "X UNFORTUNATELY, #{current_user.name} HAS REJECTED YOUR DEAL REQUEST. YOUR ORDER CANNOT BE PROCESSED.", chatroom: @chat )
 
     @deal.status = 'rejected'
 
