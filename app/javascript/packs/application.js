@@ -34,7 +34,8 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initMapbox();
   initFilterForm();
-
+  const x = document.querySelector('#messages')
+  x?.scrollTo(0, x.offsetHeight)
   document.querySelector(".map-button")?.addEventListener('click', ()=>{
     setTimeout(()=>{
       indexMap.resize()
