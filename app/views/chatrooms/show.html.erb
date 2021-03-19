@@ -8,7 +8,6 @@
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.order(created_at: :asc).each do |message| %>
       <% if message.user != current_user %>
-        <% byebug %>
         <% message.update!(read: true) %>
       <% end %>
       <% user = message.user %>
