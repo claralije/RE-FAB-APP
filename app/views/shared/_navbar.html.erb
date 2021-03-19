@@ -16,13 +16,16 @@
       </i>
     <% end %>
     </div>
+
     <div class="message <%= 'active' if controller_name == 'chatrooms' %>">
+
       <%= link_to chatrooms_path, class: "nav-link" do %>
       <i
-      id="filterbutton" class="far fa-envelope">
+      id="filterbutton" class="<%= 'blue' if current_user.has_unread_messages? %> far fa-envelope">
       </i>
       <% end %>
     </div>
+
     <div class="profile <%= 'active' if (controller_name == 'users' && action_name == 'show' && params[:id] == current_user.id.to_s) %>">
       <%= link_to user_path(current_user), class: "nav-link" do %>
       <i
@@ -30,5 +33,7 @@
       </i>
       <% end %>
     </div>
-
 </div>
+
+
+
