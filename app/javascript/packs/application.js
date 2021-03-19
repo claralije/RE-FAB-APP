@@ -35,6 +35,7 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initFilterForm();
   const x = document.querySelector('#messages')
+  console.log(x)
   x?.scrollTo(0, x.offsetHeight)
   document.querySelector(".map-button")?.addEventListener('click', ()=>{
     setTimeout(()=>{

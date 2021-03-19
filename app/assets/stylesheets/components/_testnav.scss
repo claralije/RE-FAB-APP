@@ -48,6 +48,11 @@
     flex-grow: 1;
     padding: 8px 8px;
     border-right: 1px solid $gray;
+    i{
+      &.blue{
+        color: $neon
+      }
+    }
   }
   .profile {
     display: flex;
@@ -58,6 +63,3 @@
   }
 }
 
-.blue {
-  color: $neon;
-}
