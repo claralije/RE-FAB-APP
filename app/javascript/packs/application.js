@@ -36,7 +36,7 @@ document.addEventListener('turbolinks:load', () => {
   initFilterForm();
   const x = document.querySelector('#messages')
   console.log(x)
-  x?.scrollTo(0, x.offsetHeight)
+  x?.scrollTo(0, x.scrollHeight)
   document.querySelector(".map-button")?.addEventListener('click', ()=>{
     setTimeout(()=>{
       indexMap.resize()

@@ -19,7 +19,7 @@
         <%= "#{chatroom.other_user(current_user).name}"%>
         </div>
         <div class="content">
-        <%= "#{chatroom.messages.last.content.truncate_words(12)}..." %>
+        <%= "#{chatroom.messages.last.content.truncate(30)}..." %>
       </div>
       </div>
 
