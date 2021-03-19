@@ -1,8 +1,9 @@
 <div class="chatroom-container">
 
   <div>
-    <h1> Chat with <%= @chatroom.other_user(current_user).name %> </h1>
+    <h1> <%= link_to "Chat with #{@chatroom.other_user(current_user).name} ", user_path(@chatroom.other_user(current_user)) %> </h1>
   </div>
+
 
 <!-- ALL THE MSG -->
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">

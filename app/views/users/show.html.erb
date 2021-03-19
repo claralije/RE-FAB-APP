@@ -54,7 +54,7 @@
 
           <div class="product-scroll">
             <div class="cards">
-              <% @user.products.each do |product| %>
+              <% @user.products.order(created_at: :desc).each do |product| %>
                   <%= render 'products/card', product: product %>
               <% end %>
             </div>
@@ -92,15 +92,15 @@
                   <div class="product-scroll">
                     <div class="cards">
                   <!-- Your PENDING, PROCESSING, and PAST deals all go here -->
-                      <% @pending_deals.each do |deal| %>
+                      <% @pending_deals.order(created_at: :desc).each do |deal| %>
                         <%= render 'deals/card', deal: deal, product: deal.product %>
                       <% end %>
 
-                      <% @closed_deals.each do |deal| %>
+                      <% @closed_deals.order(created_at: :desc).each do |deal| %>
                         <%= render 'deals/card', deal: deal, product: deal.product %>
                       <% end %>
 
-                      <% @in_process_deals.each do |deal| %>
+                      <% @in_process_deals.order(created_at: :desc).each do |deal| %>
                         <%= render 'deals/card', deal: deal, product: deal.product %>
                       <% end %>
 
@@ -111,7 +111,7 @@
              <h3><strong> By others, to you / </strong></h3>
               <div class="product-scroll">
                 <div class="cards">
-                    <% @my_product_deals.each do |deal| %>
+                    <% @my_product_deals.order(created_at: :desc).each do |deal| %>
                       <%= render 'deals/card', deal: deal, product: deal.product %>
                     <% end %>
                 </div>
@@ -128,7 +128,7 @@
         <% else %>
           <div class="product-scroll">
             <div class="cards">
-              <% @favorites.each do |favorite| %>
+              <% @favorites.order(created_at: :desc).each do |favorite| %>
                 <%= render 'products/card', product: favorite.product %>
               <% end %>
             </div>
