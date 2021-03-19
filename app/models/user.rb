@@ -55,6 +55,11 @@ class User < ApplicationRecord
 
     return user
   end
+
+  def has_unread_messages?
+    Message.joins(:chatroom).where(chatrooms: {user_a: self}).or(Message.joins(:chatroom).where(chatrooms: {user_b: self})).where(messages:{read: false}).where.not(messages:{user: self}).any?
+  end
+
   def has_pending_deals_with(other_user)
     deals.joins(:product).where(products: {user: other_user}, deals: {status: 'pending'}).any?
   end

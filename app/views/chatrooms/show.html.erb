@@ -7,6 +7,7 @@
 <!-- ALL THE MSG -->
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.order(created_at: :asc).each do |message| %>
+      <% message.update(read: true) if message.user != current_user %>
       <% user = message.user %>
       <div class="<%= user == current_user ? "sent" : "received" %>" id="messages-ajax">
 
