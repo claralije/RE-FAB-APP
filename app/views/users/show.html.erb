@@ -12,10 +12,12 @@
       </div>
 
       <div>
-        <% if @user.photo.attached? %>
+        <% if @user.facebook_picture_url %>
+          <div class="show-image" style="background-image: url('<%= @user.facebook_picture_url%>')">
+        <% elsif @user.photo.attached? %>
           <div class="show-image" style="background-image: url('<%= cl_image_path @user.photo.key, height: 300, width: 400, crop: :fill %>')">
         <% else %>
-          <div class="show-image" style="background-image: url('')">
+          <div class="show-image" style="background-image: url('https://i.pravatar.cc/500')">
         <% end %>
       </div>
 
@@ -85,7 +87,7 @@
               <h3><strong>Deals /</strong></h3>
               <% if @user.deals.empty? %>
                 <p>No deals yet.</p>
-              <% else %>
+              <% end %>
                 <h3><strong>By you, to others /</strong></h3>
                   <div class="product-scroll">
                     <div class="cards">
@@ -106,7 +108,7 @@
                 </div>
             </div>
             <div class="users-deals-two" id="deal-notif">
-                <h3><strong> By others, to you / </strong></h3>
+             <h3><strong> By others, to you / </strong></h3>
               <div class="product-scroll">
                 <div class="cards">
                     <% @my_product_deals.each do |deal| %>
@@ -114,7 +116,6 @@
                     <% end %>
                 </div>
               </div>
-              <% end %>
             </div>
           </div>
          <% end %>
